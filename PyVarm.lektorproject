@@ -1,0 +1,8 @@
+[project]
+name = PyVarm
+
+[servers.prod]
+name = Production
+enabled = yes
+default = yes
+target = rsync://pyvarm@172.105.84.34:/var/www/PyVarm
