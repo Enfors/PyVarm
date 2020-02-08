@@ -1,0 +1,116 @@
+title: User Project: AzuraBot part 1
+---
+pub_date: 2020-02-08
+---
+author: Christer Enfors
+---
+body:
+
+In order to provide some contents for the Python Värmland website,
+I've decided to start writing about some of the Python projects that
+I'm working on. If you have a project that you'd like to post about
+here, please let me know and we'll make it happen.
+
+I've been interested in chatbots - software that uses a chat interface
+as its primary interface - since the mid 90's. Back then, I was
+writing IRC chatbots in C. And when the Ironman movie came out with
+the main protagonist's "Jarvis" AI, my interest was rekindled. I
+decided to write my first Python chatbot, and thus, I created
+[EnforsBot](https://www.github.com/enfors/EnforsBot).
+
+EnforsBot
+=========
+
+When I started writing EnforsBot, I had no clear vision of what I
+wanted it to do. All I knew was that I wanted to have my own "Jarvis"
+that I could talk to, even if it didn't have any real AI of its own;
+as long as I could chat with it, I was happy.
+
+Since I had previously worked with various Twitter APIs, I started
+with making a Twitter interface for EnforsBot. Then, I added a
+Telegram interface, and eventually I wrote an IRC interface (while
+listening to [Boten Anna](https://www.youtube.com/watch?v=RYQUsp-jxDQ)
+by Basshunter on repeat - a Swedish song about mistaking a real user
+for an IRC chatbot). Each of these interfaces ran in its own thread
+(the Twitter interface actually used two threads), while the bot
+itself ran in the main thread.
+
+Over time, I added various features to the bot, such as being able to
+turn on and off lights in my house that were controlled by a radio
+signal from a small Telldus USB stick attached to the Raspberry PI on
+which the bot software was running. I created a simple multiplication
+practice mode for my kids, which kept track of highscores. Among the
+last things I added to EnforsBot was a mode for labelling sentences
+sourced from Twitter for sentiment analysis for a simple machine
+learning algorithm I write.
+
+In the end, all these various functionalities (not all of which were
+fully working) ended up turning the whole project into a mess. It made
+it very tedious to set up on a new host; for example, the part that
+allowed me to control the lights needed a specific SDK to be
+installed, and all the user interfaces (Twitter, Telegram and IRC)
+required their own accounts with login details provided by the user in
+files. And the bot would refuse to start unless everything was set up
+properly. Therefore, I decided to put EnforsBot aside and start anew.
+
+AzuraBot - the fresh start
+==========================
+
+[AzuraBot](https://www.github.com/enfors/AzuraBot) is my current
+chatbot project. To prevent some of the problems with EnforsBot,
+AzuraBot is plugin-based, which means that I can easily disable parts
+of the bot that I no longer want to use without having to make code
+changes, while still making it easy to put them back in later if I so
+choose.
+
+AsyncIO instead of threads
+--------------------------
+
+AsyncIO is the new hotness in Python, and it seems like a simpler way
+of doing things than threads. Functionally, the difference between
+working with threads and AsyncIO in Python is that when you're working
+with threads, you don't control when one thread will stop executing
+and another one will begin. Therefore, you need to keep careful watch
+over your data structures with locks of various kinds, to prevent bad
+things from happening. But with AsyncIO, you yourself control when the
+context swtiching between "threads" (although they're not really
+threads, they're tasks) will happen. That means that you can make sure
+that these context switches only happen when they don't risk messing
+things up.
+
+Plans for AzuraBot
+------------------
+
+So what do I want to use AzuraBot for? Well, there are a lot of things
+you can do with a chatbot - it's just a different kind of interface
+from what most of us are used to. Here are some examples:
+
+- A plugin that helps me remember where I put things. I can say "My
+  [thing] is in [location]," for example "my Nintendo 3DS is in the
+  bedroom cupboard," and then I can ask, "where is my Nintendo 3DS"
+  and have the chatbot tell me.
+
+- A plugin that sends me a message in the morning with a list of all
+  that day's meetings (which it gets by looking at my Google
+  calendar), as well as what the weather will be like today.
+
+- Staying within the weather theme, a plugin could warn me about
+  upcoming rain.
+
+- Another plugin could keep track of my todos, and ask me when I
+  intend to finish them. Then, at that time, it can ask me if I did in
+  fact finish them on time, to keep me accountable.
+
+- A variation of the todo list would be a grocery list plugin, which
+  learns over time in which order I pick things up at the grocery
+  store, so that it over time learns (by using something like a Hidden
+  Markov Chain algorithm) in which order I typically pass by the items
+  in the store so the list can be automatically sorted in this order.
+
+- A personal trainer plugin could tell me to do pushups and situps at
+  specific times, and then ask me how many I did, to track my progress
+  over time.
+
+My day job is keeping me busy (along with my family and their
+activities), but I hope to make some progress on this project soon;
+and when I do, I'll post the next part in this series.
