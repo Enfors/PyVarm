@@ -5,4 +5,4 @@ name = PyVarm
 name = Production
 enabled = yes
 default = yes
-target = rsync://pyvarm@172.105.84.34:/var/www/PyVarm
+target = rsync://pyvarm@www.pythonvarmland.se:/var/www/PyVarm
