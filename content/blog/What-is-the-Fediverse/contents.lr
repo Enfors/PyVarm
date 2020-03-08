@@ -4,7 +4,9 @@ pub_date: 2020-03-08
 ---
 author: Christer Enfors
 ---
-body:
+pythondevshandle: Enfors
+---
+blurb:
 
 The short version is as follows:
 
@@ -12,6 +14,8 @@ Mastodon is a Twitter-like social netork, and the Fediverse is a
 network of social networks.
 
 But let's also delve into the slightly longer version below.
+---
+body:
 
 What is Mastodon?
 =================

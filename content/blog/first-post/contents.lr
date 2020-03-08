@@ -4,13 +4,19 @@ pub_date: 2020-02-07
 ---
 author: Christer Enfors
 ---
-body:
+pythondevshandle: Enfors
+---
+blurb:
 
 [www.pythonvarmland.se](/) has moved from its previous Azure host to
 Linode, and at the same time the backend software was changed from the
 Django-based [Mezzanine](http://mezzanine.jupo.org/) (which was very
 nice but a bit overkill) to the much simpler
-[Lektor](https://www.getlektor.com). At the same time, encryption of
+[Lektor](https://www.getlektor.com).
+---
+body:
+
+At the same time, encryption of
 the website traffic was enabled through [Let's
 Encrypt](https://www.letsencrypt.org). Blog posts from the old host
 will be moved over to the new host shortly.

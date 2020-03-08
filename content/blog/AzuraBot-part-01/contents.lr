@@ -4,7 +4,9 @@ pub_date: 2020-02-08
 ---
 author: Christer Enfors
 ---
-body:
+pythondevshandle: Enfors
+---
+blurb:
 
 In order to provide some contents for the Python Värmland website,
 I've decided to start writing about some of the Python projects that
@@ -17,6 +19,8 @@ writing IRC chatbots in C. And when the Ironman movie came out with
 the main protagonist's "Jarvis" AI, my interest was rekindled. I
 decided to write my first Python chatbot, and thus, I created
 [EnforsBot](https://www.github.com/enfors/EnforsBot).
+---
+body:
 
 EnforsBot
 =========
