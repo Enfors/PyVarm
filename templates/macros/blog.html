@@ -5,16 +5,16 @@
   {% else %}
     <h2>{{ post.title }}</h2>
   {% endif %}
-  <p class="meta">
-    written by
-    {% if post.twitter_handle %}
-      <a href="https://twitter.com/{{ post.twitter_handle
-        }}">{{ post.author or post.twitter_handle }}</a>
+  <p class="meta"><i>
+    Written by
+    {% if post.pythondevs_handle %}
+      <a href="https://pythondevs.social/{{ post.pythondevs_handle
+        }}">{{ post.author or post.pythondevs_handle }}</a>
     {% else %}
       {{ post.author }}
     {% endif %}
     on {{ post.pub_date }}
-  </p>
+  </i></p>
   {{ post.body }}
   </div>
 {% endmacro %}

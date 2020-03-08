@@ -1,0 +1,157 @@
+title: What is Mastodon and the Fediverse?
+---
+pub_date: 2020-03-08
+---
+author: Christer Enfors
+---
+body:
+
+The short version is as follows:
+
+Mastodon is a Twitter-like social netork, and the Fediverse is a
+network of social networks.
+
+But let's also delve into the slightly longer version below.
+
+What is Mastodon?
+=================
+
+One could say that [Mastodon](https://joinmastodon.org) is an Open
+Source alternative to [Twitter](https://www.twitter.com). If you're
+familiar with how Twitter works, then Mastodon isn't that hard to get
+used to.
+
+Why should I use Mastodon over Twitter?
+---------------------------------------
+
+**If you don't like how Mastodon is being run, you can go to another
+Mastodon instance.** That's right - there are multiple Mastodon
+instances, all being run slightly differently by different people. If
+you're being harassed on Twitter and Twitter won't help you, you're
+out of luck - there's no "other Twitter" to go to. But Mastodon is
+different. There are many Mastodon instances, all run by different
+people. But the Mastodon instances are connected in a giant network
+called the Fediverse (more on that below), which means that if you
+have an account on one Mastodon instance, you can still follow and
+interact with people who have accounts on another instance. Each
+Mastodon instance has its own URL - the most popular and well-known
+one is [Mastodon.social](https://mastodon.social), but there are many
+others. Oh, and by the way, if you're confused by the ".social" part of
+the URL, that's just another top level domain now, just like .com and
+.org.
+
+**You should use Mastodon because it's truly free.** Mastodon isn't
+run by a corporation to make money. It is run by hobbyists (typically)
+because they *enjoy* it. They're not trying to make money off your
+data, they don't track you, and there are no ads.
+
+So how do I know which Mastodon instance I should join?
+-------------------------------------------------------
+
+Each instance typically has a theme, or a topic. If you're into
+technology in general, there's for example one called
+[Mastodon.technology](https://mastodon.technology). There are Mastodon
+instances for various social groups, and languages. If you go to
+[joinmastodon.org](https://joinmastodon.org) you can find a list.
+
+Personally, I'm partial to the Instance I'm running targeted at Python
+developers of all stripes -
+[PythonDevs.social](https://pythondevs.social) (although it's not
+strictly a Mastodon instance, it runs another software called Pleroma
+which is compatible with Mastodon).
+
+Can I use Mastodon from my smartphone?
+--------------------------------------
+
+Yes, you can use Mastodon (and Pleroma, as in the case of
+[PythonDevs.social](https://pythondevs.social), since it's compatible
+with Mastodon) various apps. When it comes to Android, I
+would recommend
+[Tusky](https://play.google.com/store/apps/details?id=com.keylesspalace.tusky&hl=en_US),
+but you can search the App Store and Play Store for "Mastodon", and
+you'll find a variety of available apps. Also, you can use the web
+interface on your smartphone as well as your desktop by simply
+clicking on the link to an instance, such as
+[PythonDevs.social](https://pythondevs.social). 
+
+What is the Fediverse?
+======================
+
+Okay. By now, I hope we all at least sort of understand what Mastodon
+is. So what's this about Fediverse? What's that?
+
+I'm glad you asked. Let's say you have a Twitter account, and you want
+to follow your friend. But she doesn't have a Twitter account, she
+only has a Facebook account - and for one reason or another, you don't
+want a Facebook account, and she doesn't want a Twitter account.
+
+That means you simply can't follow eachother. Such is life. The end.
+
+The Fediverse is different. As I said initially, the Fediverse is a
+network of social networks. For example, Mastodon instances are
+connected to the Fediverse. [PeerTube](https://joinpeertube.org), an
+open source alternative to YouTube, is also connected to the
+Fediverse, as is [Friendica](https://friendi.ca) which is more like
+Facebook than Twitter. This means that **any user on any of these
+instances can follow and interact with any other user on any other
+instance**, as if a Twitter user could follow a Facebook user.
+
+How do you handle abuse in the Fediverse?
+-----------------------------------------
+
+First of all, you should find an instance where you agree with the
+Terms of Service (they're typically short, and easy to understand).
+For example, you can find the Terms of Service on
+[PythonDevs.social](https://pythondevs.social) by clicking
+[About](https://pythondevs.social/about) on its start page.
+
+You can report users who misbehave, just like on any other social
+network. Most instances are small, and have active administrators who
+care about dealing with such things. But what if there's an instance
+which doesn't care if their users abuse the rest of us? Then what do
+we do?
+
+Introducing Gab. Gab is Fediverse instance which values free speech
+over everything else. They let their users pretty much say and do
+anything they want, including harassing other people. This means that
+nazis, homophobes, bullies, and other lowlives flock to Gab (I think
+of Gab as a bridge, under which the trolls live). At the risk of
+sounding like Trump, I'll add that I assume that there are some good
+people on Gab as well who simply value free speech over the ability to
+be an unfettered asshole, but I'd wager they're in the minority.
+
+This unwillingness of dealing with trolls on the part of the Gab
+administration posed a problem for the Fediverse, which most of us
+instance administrators simply dealt with by blocking all content from
+Gab on our instances. This means that while Gab is technically part of
+the Fediverse, almost all Fediverse instances refuse to communicate
+with them. We simply leave them alone to stew in their echo chamber of
+hate, homophobia, and general assholery. At least we don't have to see
+any of it - unless we choose to join an instance which doesn't block
+Gab, or even Gab itself.
+
+But none of my friends use the Fediverse!
+=========================================
+
+The Fediverse is a ghost town! I don't know anyone there! All my
+friends are on Twitter and Facebook!
+
+Sure. But instead of finding your friends in the Fediverse, you can
+make friends with the people that are there! Again, find an instance
+that caters to your interest, and start talking to people on that
+instance. And keep at it - keep coming back, and you'll find that you
+have meaningful interactions with like-minded people every time you
+do.
+
+Come join pythondevs.social and say hi
+======================================
+
+If this post has piqued your interest, and if you're into Python
+development (which I assume you are since you're on
+[pythonvarmland.se](https://www.pythonvarmland.se)), then I encourage
+you to come join us at [PythonDevs.social](https://pythondevs.social).
+The instance is focused on Python development, but it's not just for
+Python developers from Värmland - it's open to everybody. You'll find
+me at [PythonDevs.social/Enfors](https://pythondevs.social/Enfors). In
+a future blog post, I'll go into a little more detail about this
+particular instance, and what it can offer Python developers.
