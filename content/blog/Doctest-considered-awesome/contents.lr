@@ -1,0 +1,239 @@
+title: Doctest considered awesome
+---
+pub_date: 2020-03-11
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+[Doctest](https://docs.python.org/3/library/doctest.html) is a really
+clever builtin Python module which allows you to embed automated tests
+in documentation strings. If you're somewhat new to Python and that
+sounds complicated - it isn't. It is very easy to set up; I will show
+you how.
+
+---
+body:
+
+How documentation strings work in Python functions
+==================================================
+
+Let's say you have a file with a function which adds two numbers
+together. Such a function obviously isn't useful, but I'll use it as a
+simple example of how we can use `doctest` to both document and test
+the function. So here's our file:
+
+```python
+def add_two_numbers(a, b):
+    return a + b
+```
+
+In case you're not familiar with how documentation strings in Python
+works, I will show you - let's add some documentation to the function.
+
+```python
+def add_two_numbers(a, b):
+    """
+    This function adds its two arguments together, and returns the
+    result.
+    """
+    return a + b
+```
+
+If we save this file as `my_file.py`, we can then start an interactive
+Python interpreter and import it automatically with the '-i' option
+(providing it's in the current directory). Then, we can use Python's
+`help()` function to see it:
+
+```
+$ python -i my_file.py
+>>> help(add_two_numbers)
+Help on function add_two_numbers in module __main__:
+
+add_two_numbers(a, b)
+    This function adds its two arguments together, and returns the
+    result.
+```
+
+Enter doctest
+=============
+
+Okay, now that we know the basics of documentation strings, let's add
+some tests to them. First, we need to launch a Python interpreter and
+import `my_file.py` as before. Then, we can manually test our function
+a few times and see that it works:
+
+```
+$ python3 -i my_file
+>>> my_file.add_two_numbers(1, 2)
+3
+>>> my_file.add_two_numbers(2, 3)
+5
+>>> my_file.add_two_numbers(3, 5)
+8
+>>>
+```
+
+It seems to work as it should. Now, *copy and paste your manual tests
+into the function's documentation string* (taking care to get the
+indentation right), so the function ends up looking like this:
+
+```python
+def add_two_numbers(a, b):
+    """
+    This function adds its two arguments together, and returns the
+    result.
+    >>> add_two_numbers(1, 2)
+    3
+    >>> add_two_numbers(2, 3)
+    5
+    >>> add_two_numbers(3, 5)
+    8
+    >>>
+    """
+    return a + b
+```
+
+The text you just copy and pasted into the documentation string, *is*
+the automated tests! Those examples you added shows `doctest` how the
+code *should* work. Now we can run them like this:
+
+```
+$ python3 -m doctest my_file.py
+$
+```
+
+... except, that's a bit underwhelming, isn't it? It didn't print
+anything. Well, that's because all the tests passed. Let's add a bug
+to the function's last line, the return statement:
+
+```python
+    return a + b + 1
+```
+
+That "`+ 1`" shouldn't be there - it's a bug. Now let's see what happens
+if we run the tests again:
+
+```
+$ python3 -m doctest my_file.py 
+**********************************************************************
+File "/home/enfors/tmp/my_file.py", line 5, in my_file.add_two_numbers
+Failed example:
+    add_two_numbers(1, 2)
+Expected:
+    3
+Got:
+    4
+**********************************************************************
+File "/home/enfors/tmp/my_file.py", line 7, in my_file.add_two_numbers
+Failed example:
+    add_two_numbers(2, 3)
+Expected:
+    5
+Got:
+    6
+**********************************************************************
+File "/home/enfors/tmp/my_file.py", line 9, in my_file.add_two_numbers
+Failed example:
+    add_two_numbers(3, 5)
+Expected:
+    8
+Got:
+    9
+**********************************************************************
+1 items had failures:
+   3 of   3 in my_file.add_two_numbers
+***Test Failed*** 3 failures.
+```
+
+As you can see, all three tests failed. They show you what kind of
+output they expected for the test to pass, and what they got instead.
+That helps us locate the bug, and fix it (do that now, so you don't
+get these errors again).
+
+Testing print statements
+========================
+
+Apart from testing the return values of functions, you can also test
+what they print - anything you can see the output of in the
+interactive interpreter, you can test with `doctest`. Let's add a
+second function which adds two string together instead of numbers, and
+add some tests to it in the same way:
+
+```python
+def add_two_strings(a, b):
+    """
+    This function adds its two string arguments together, and
+    prints the result rather than returning it.
+
+    >>> add_two_strings("foo", "bar")
+    foobar
+    >>>
+    """
+    print(a + b)
+```
+
+If we run `doctest` on the file now, we see that we currently get no
+errors (providing you fix the "`+ 1`" bug we added to the previous
+function above):
+
+```
+$ python3 -m doctest my_file.py
+$
+```
+
+But as soon as we add a little bug to our print statement at the end
+of `add_two_strings()`, like so:
+
+```
+    print(a + b + "bug")
+```
+
+... then we get an error when we run the tests:
+
+```
+$ python3 -m doctest my_file.py 
+**********************************************************************
+File "/home/enfors/tmp/my_file.py", line 20, in my_file.add_two_strings
+Failed example:
+    add_two_strings("foo", "bar")
+Expected:
+    foobar
+Got:
+    foobarbug
+**********************************************************************
+1 items had failures:
+   1 of   1 in my_file.add_two_strings
+***Test Failed*** 1 failures.
+```
+
+A quick recap
+=============
+
+So, to recap how to use `doctest`:
+
+1. Write your function
+
+2. Test it manually in the interpreter with `python3 -i my_file.py`
+
+3. Copy the results of your manual test to the function's docstring
+
+4. Test it with `python3 -m doctest my_file.py`
+
+Conclusion
+==========
+
+That's all you need to know to start using `doctest`. As experienced
+developers can tell, you can't use `doctest` for all kinds of
+automated tests, but you can do a lot with it. Any function that you
+can test manually in the interpreter, you can test automatically with
+`doctest`. And these tests are so easy to add, and they serve as
+documentation too, so why *not* add them?
+
+In a future blog post, I will show you how you can use `doctest` to
+make a simple "mini continuous integration" system for projects
+where you use `git` for version control, by adding a git hook that
+automatically tests the code you commit and refuses to accept it if
+the tests do not pass.
