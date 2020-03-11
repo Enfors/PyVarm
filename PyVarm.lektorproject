@@ -6,3 +6,6 @@ name = Production
 enabled = yes
 default = yes
 target = rsync://pyvarm@www.pythonvarmland.se:/var/www/PyVarm
+
+[packages]
+lektor-markdown-highlighter = 0.3.1
