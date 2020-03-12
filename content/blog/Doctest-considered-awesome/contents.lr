@@ -67,11 +67,11 @@ a few times and see that it works:
 
 ```
 $ python3 -i my_file
->>> my_file.add_two_numbers(1, 2)
+>>> add_two_numbers(1, 2)
 3
->>> my_file.add_two_numbers(2, 3)
+>>> add_two_numbers(2, 3)
 5
->>> my_file.add_two_numbers(3, 5)
+>>> add_two_numbers(3, 5)
 8
 >>>
 ```
