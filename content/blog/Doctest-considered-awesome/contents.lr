@@ -45,7 +45,7 @@ def add_two_numbers(a, b):
 If we save this file as `my_file.py`, we can then start an interactive
 Python interpreter and import it automatically with the '-i' option
 (providing it's in the current directory). Then, we can use Python's
-`help()` function to see it:
+`help()` function to see the documentation:
 
 ```
 $ python -i my_file.py
@@ -66,7 +66,7 @@ import `my_file.py` as before. Then, we can manually test our function
 a few times and see that it works:
 
 ```
-$ python3 -i my_file
+$ python3 -i my_file.py
 >>> add_two_numbers(1, 2)
 3
 >>> add_two_numbers(2, 3)
@@ -98,7 +98,7 @@ def add_two_numbers(a, b):
 
 The text you just copy and pasted into the documentation string, *is*
 the automated tests! Those examples you added shows `doctest` how the
-code *should* work. Now we can run them like this:
+code *should* work. Now we can run the tests like this:
 
 ```
 $ python3 -m doctest my_file.py
