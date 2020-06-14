@@ -1,27 +1,45 @@
-title: Join our Fediverse community
+title: Join our community
 ---
 body:
 
-If you want to get in contact with other Python users in Värmland,
-please feel free to join our newly created Fediverse community,
-[PythonDevs.social](https://pythondevs.social). Until we can get
-regular meetups going, that Fediverse instance is the main "thing"
-that Python Värmland "does".
+We have two communities you can join: Our Slack community (click
+[here](https://join.slack.com/t/pythonvarmland/shared_invite/zt-6k0frizk-Oh2yFJbmzKtFMcOlEu7P3Q)
+to join it, or [here](https://pythonvarmland.slack.com) to log in).
+
+So which one should you join? Well, if you're unsure, start with the
+Slack community. If you're not familiar with Slack, one could say that
+Slack is to workplaces what Discord is to gaming. It's easy to use,
+and you don't have to download anything to use it (although, from a
+phone it's better to just download the Slack app).
+
+The Slack community
+-------------------
+
+On our Slack community, we have a few channels set up.
+
+- **#general** is our main channel.
+
+- **#help** is a channel where you can ask for Python-related help.
+
+- **#random** is for anything off-topic that you might want to discuss
+  with our other users. Games, cars, movies - whatever.
+
+- **#website-updates** is where we post info about changes we make to
+  this website (to avoid spamming #general with it).
+
+PythonDevs.social - our Fediverse community
+-------------------------------------------
+
+If you want to get in contact with other Python users in the Fediverse,
+please feel free to join our Fediverse community
+[PythonDevs.social](https://pythondevs.social). 
 
 To join [PythonDevs.social](https://pythondevs.social), just click on
 the link and register an account. If you want to learn more about the
 Fediverse, feel free to read our [blog
-post](/blog/What-is-the-Fediverse/) about it.
-
-What about the Slack community we used to have?
------------------------------------------------
-
-Since we now have our [PythonDevs.social](https://pythondevs.social)
-Fediverse instance, we are gradually phasing out the old Slack
-community. Slack is not free software, and we have no control over
-what they do with what we post there. Our Fediverse instance, on the
-other hand, is running an open source software called Pleroma.
-
-But if you for some reason want to access our old Slack community, and
-you already have an account, you can access it
-[here](https://pythonvarmland.slack.com). 
+post](/blog/What-is-the-Fediverse/) about it. The short version is that
+the Fediverse is a largely Open Source-based social network. Imagine if
+Facebook, Twitter and YouTube were all Open Source, and Facebook users
+could message Twitter users, and vice versa. That is sort of what the
+Fediverse is. Think of our Fediverse community as Twitter for Python
+users.
