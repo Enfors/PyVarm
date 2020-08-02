@@ -1,0 +1,60 @@
+title: Python for Absolute Beginners: Introduction
+---
+body:
+
+As explained earlier, the Short version below is for experiences
+programmers. If you are not, proceed to the Full version below it.
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+- Install Python. If you're running Linux, make sure you also install
+  IDLE, Python's "default" IDE.
+- Start IDLE.
+- Create a new file from IDLE's `File` menu, and call the file
+  `hello.py`. Enter the following in the file:
+
+***
+
+```python
+# Simple Hello world example (this is a comment).
+print("Hello world!")
+
+height = 42
+width = 15
+area = height * width
+
+# Note the 'f' before the string in the following line.
+# It's why we can use {area} to print its value.
+print(f"The area is {area}.")
+```
+
+***
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Installing Python**
+
+- If you haven't already installed Python, we need to start with doing
+  that. 
+  - If you're using Windows or Mac:
+    - Install python by downloading the latest version from
+      [www.python.org](https://www.python.org) and running the
+      installer.
+  - If you're using Linux:
+    - Install the package using your distribution's package installer.
+      On Ubuntu (or other Debian derivates), this is typically done by
+      typing `sudo apt install python3 idle3` at the terminal. Note
+      that we're installing `idle3` too; it's Python's built-in IDE.
+      This tutorial assumes you're using it, but if you prefer to use
+      something else, then that's fine.
+    
+- We're going to be using IDLE, Python's built-in IDE. On Windows
+  and Mac it comes with the Python installation, and on Linux you can
+  install it manually - the package is typically called `idle3`. On
+  Ubuntu, you install it with `sudo apt install idle3`.
+
+```python
+print("Hello world!")
+```
