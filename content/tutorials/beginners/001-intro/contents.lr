@@ -1,4 +1,4 @@
-title: Python for Absolute Beginners: Introduction
+title: Part 1: Introduction
 ---
 body:
 
@@ -11,17 +11,18 @@ The short version - for experienced programmers
 - Install Python. If you're running Linux, make sure you also install
   IDLE, Python's "default" IDE.
 - Start IDLE.
-- Create a new file from IDLE's `File` menu, and call the file
-  `hello.py`. Enter the following in the file:
-
-***
+- Create a new file from IDLE's `File` menu, and enter the following
+  in it:
 
 ```python
 # Simple Hello world example (this is a comment).
 print("Hello world!")
 
+# Create some variables
 height = 42
 width = 15
+
+# Calculate area by multiplying height with width
 area = height * width
 
 # Note the 'f' before the string in the following line.
@@ -29,7 +30,8 @@ area = height * width
 print(f"The area is {area}.")
 ```
 
-***
+- Save the file, giving it the name `hello.py`.
+- Run it by pressing `F5` on your keyboard.
 
 The full version - for beginner programmers
 -------------------------------------------
@@ -55,6 +57,196 @@ The full version - for beginner programmers
   install it manually - the package is typically called `idle3`. On
   Ubuntu, you install it with `sudo apt install idle3`.
 
+**Your first Python program**
+
+Start IDLE. A window will appear - I will explain what it's for later.
+For now, just go to `File`, then `New file` to create a new Python file.
+Call the file `hello.py` - all Python file names should end with
+`.py`. Then, write the following line in the file:
+
 ```python
 print("Hello world!")
 ```
+
+You can then run it by pressing `F5` on your keyboard - IDLE will ask
+you to save the file first, and ask for a file name. Call the file
+`hello.py` - all Python file names should end with `.py`.
+
+When the program is run, you will see the following output:
+
+```
+Hello world!
+```
+
+In other words, the print function that we used, simply displays the
+provided text on the screen. So why is it called "print"? That sounds
+more like a printer and paper kind of thing, right? Well, it's called
+"print" for historic reasons. A long time ago, computers didn't have
+screens at all, and only had printers. So, to "display" text, the
+computers had to "print" it on paper. Therefore, the function to
+display text is still called "print" in many programming languages.
+
+**Adding variables**
+
+Okay, so now we know how to display things on the screen. But we need
+to have some sort of dynamic content - just displaying static text,
+like in the previous example, would get boring really fast.
+
+Enter variables. Variables is the term used for a piece of data stored
+by a program. The data in a variable can change - it can "vary", hence
+the name. To see how they work, add some lines to our previous program
+so that it ends up looking like this:
+
+```python
+print("Hello world!")
+
+height = 42
+width = 15
+```
+
+Now we have two variables, called `height` and `width`, containing the
+numbers 42 and 15, respectively. It doesn't matter if it represents
+meters, feet or anything else - the point is that we can store numbers
+in variables. If it helps, you can think of a program's variables as a
+chest of drawers. On one drawer, we put the label `height`, and inside
+that drawer we store the number 42. And in another drawer which we
+label `width`, we store the number 15.
+
+**Using math on our variables**
+
+We can use our variables to calculate things. For example, let's add a
+line to our program to calculate the size of an area, based on the
+`height` and `width` variables we already have:
+
+```python
+print("Hello world!")
+
+height = 42
+width = 15
+
+area = height * width
+```
+
+As you might have guessed, the asterisk character is used to represent
+multiplication in Python. So that line can be read as `area equals
+height multiplied by width`, which makes sense.
+
+Now we want to know what the results of the multiplication was, so we
+simply add a line to print it:
+
+```python
+print("Hello world!")
+
+height = 42
+width = 15
+
+area = height * width
+
+print(area)
+```
+
+When we save our program (using the menu, or by pressing `Control-s`)
+and run it by pressing `F5`, we will see the following output:
+
+```
+Hello world!
+630
+```
+
+The result of the multiplication - the area calculated - is 630. But
+wouldn't it be nicer if we also printed some text to explain what
+`630` means? Of course it would. The way we do that is by changing the
+last `print` line, to look like this (don't miss the "`f`" after the
+"`(`" character):
+
+```python
+print(f"The area is {area}.")
+```
+
+Now when we save it (`Control-s`) and run it (`F5`), the output looks
+like this:
+
+```
+Hello world!
+The area is 630.
+```
+
+But what exactly is the purpose of that little "`f`" on the print
+line, anyway? I'm glad you asked, because it brings us to a very
+important point about programming:
+
+*If you want to learn programming, you have to experiment*.
+
+So, in the spirit of experimentation, let's simply remove the "`f`"
+and see what happens! Change the line like so:
+
+```python
+print("The area is {area}.")
+```
+
+Save it (`Control-s`), run it (`F5`), and we get the following output:
+
+```
+Hello world!
+The area is {area}.
+```
+
+What happened now was that without the "`f`", the text from the print
+line is displayed verbatim; the `{area}` part wasn't replaced with the
+*content* of the `area` variable. In other words, the "`f`" allows us
+to insert the *content*, rather than the *name* of a variable, into
+text.
+
+**Comments - how to make the program easier to read**
+
+Good programmers will typically add "comments" to their programs to
+make them easier to read. The computer will ignore these comments when
+the program is run - they are strictly meant for people reading them.
+We can add comments in Python using the "`#`" character, and then
+putting the comment text after it on the same line. Let's add some
+comments to our `hello.py` program, to make it a bit more clear what's
+going on:
+
+```python
+# Simple Hello world example (this is a comment).
+print("Hello world!")
+
+# Create some variables
+height = 42
+width = 15
+
+# Calculate area by multiplying height with width
+area = height * width
+
+# Note the 'f' before the string in the following line.
+# It's why we can use {area} to print its value.
+print(f"The area is {area}.")
+```
+
+When you save and run the program, you will see that its *output* has
+not been changed by the comments, since the computer ignores them.
+
+Try to make a habit out of adding comments to the programs you write.
+Use them to explain what you, as the programmer, are thinking. If you
+look at your program many years later, you may have forgotten how it
+works - then your comments will be helpful. They also make it easier
+for other people to read and understand your program.
+
+Exercise
+--------
+
+*Don't worry. This isn't the kind of exercise that makes you sweat.*
+
+Using the program we have writte above as a base, see if you can make
+the following changes:
+
+1. Add a variable called `depth`, and give it whatever number you
+   like. 
+1. Add another variable called `volume` and use it to store the result
+   of a multiplication of `height`, `width`, and `depth`.
+1. Add an extra print line which prints the volume, in the same manner
+   as the one that prints the area.
+   
+Good luck! The answer will be included in the next part of the
+tutorial.
+
