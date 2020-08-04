@@ -2,8 +2,8 @@ title: Part 2: User Input
 ---
 body:
 
-As explained earlier, the Short version below is for experiences
-programmers. If you are not, proceed to the Full version below it.
+In this part, we are going to look at how to get the user to type
+something on their keyboard, and storing the result in a variable.
 
 The short version - for experienced programmers
 -----------------------------------------------
@@ -12,10 +12,10 @@ Create a new file, and call it `user_input.py`:
 
 ```python
 # Example of how to get user input from keyboard
-name = input("What is your name?")
+name = input("What is your name? ")
 print(f"Hello, {name}! Nice to meet you!")
 
-age = input("How old are you?")
+age = input("How old are you? ")
 # Use int() function to convert input to integer
 age = int(age)  # age = int(input(...)) works too
 print(f"Oh I see, you're {age} years old.")
@@ -27,7 +27,10 @@ The full version - for beginner programmers
 **Answer to the exercise in Part 1**
 
 Let's start with showing the answer to the exercise from [Part
-1](../001-intro/).
+1](../001-intro/). Please note that you can solve the problem in many
+different ways, but this is one of the easiest ways of doing it. But
+don't worry if your version differs a bit from this one - the
+important part is that it works.
 
 ```python
 # Simple Hello world example (this is a comment).
@@ -36,18 +39,184 @@ print("Hello world!")
 # Create some variables
 height = 42
 width = 15
-depth = 20
+depth = 20  # Here, we add the depth variable
 
 # Calculate area by multiplying height with width
 area = height * width
-volume = height * width * depth
+volume = height * width * depth  # Calculate volume
 
 # Note the 'f' before the string in the following line.
 # It's why we can use {area} to print its value.
 print(f"The area is {area}.")
-print(f"The volume is {volume}.")
+print(f"The volume is {volume}.")  # Print the volume
+```
+
+Now that we're done with that, let's move on to the meat of this part!
+
+**Reading user input**
+
+Let's create a new Python file, by opening IDLE and selecting `File`
+and then `New file`. We will be calling this file `user_input.py`.
+Technically, the name doesn't matter (other than the `.py` ending),
+you can use whatever name you want. Once the window for this new file
+is displayed, you can close the old window for our previous `hello.py`
+program if it's still open.
+
+Now, with this new `user_input.py` file, we are going to be accepting
+user input - that is to say, we will ask the user something and store
+their response in a variable. Type the following into our new file:
+
+```python
+# Example of how to get user input from keyboard
+name = input("What is your name? ")
+print(f"Hello, {name}! Nice to meet you!")
+```
+
+As you can see, we're using a new function now called `input`. It
+allows us to wait for the user to type something followed by the
+`Enter` key, before program execution continues. Note the space after
+"`name?`" above - without it, the cursor will appear right next to the
+question mark, making things look very cramped.
+
+We should also take note of the fact that program says `name =
+input(...)`. Previously, we've seen things like `height = 42`, which
+makes a lot more sense. We want `height` to be 42. But what does `name
+= input(...)` mean? To explain that, we have to take a bit of a closer
+look at exactly what functions (such as `print` and `input`) really
+are.
+
+**Functions and return values**
+
+Functions in Python are pieces of code that do something for us, so
+that we don't have to do everything ourselves all the time. The
+`print` function displays text, and the `input` function asks the user
+to type something. Some functions, such as `input`, *returns*
+something - they are said to have *return values*. In the case of
+`input`, the "return value" is what the user typed. If I run the above
+program and answer the "`What is your name?`" question with
+"`Enfors`", then the *return value* of `input` is "`Christer`".
+
+This may sound a bit confusing, but don't worry. It will soon become
+clearer. For now, just think of it this way: If program says `answer =
+input("Please answer: ")`, then whatever the user typed in response,
+will be stored in the variable `answer`.
+
+Technically, all functions have return values. But some of them (for
+example `print`) return a special value called `None`, which basically
+means "nothing" - I have nothing useful to return.
+
+**Asking the user another question**
+
+Let's add some code to ask the user another question:
+
+```python
+# Example of how to get user input from keyboard
+name = input("What is your name? ")
+print(f"Hello, {name}! Nice to meet you!")
+
+age = input("How old are you? ")
+```
+
+Great! When we have saved (`Control-s`) and ran (`F5`) the program, we
+will have the user's age stored in a variable called `age`. There is,
+however, a slight problem; the age is stored as the wrong variable
+*type* - it is stored as what is known as a "string", rather than as a
+number.
+
+So what exactly is this "string" thing of which you speak? Allow me to
+explain. Consider, if you will, the following program:
+
+```python
+print(1 + 2)      # 1 and 2 are numbers - integers, to be exact
+print("1" + "2")  # "1" and "2" are strings
+```
+
+If you were to run such a program, you would get the following result:
+
+```
+3
+12
+```
+
+What's going on here? The first line, `print(1 + 2)`, obviously worked
+as intended. But the other one seems to think that one plus two is
+twelve! This is strange, so let's experiment a bit. Let's say we tried
+the following:
+
+```python
+print("Hello" + "There")
+```
+
+Then we would get the following output:
+
+```
+HelloThere
+```
+
+And that makes sense, right? Because we're adding two *words*
+together - `"Hello"` and `"There"` - so of course we get
+`"HelloThere"`. In Python terms, we says that `"Hello"` and `"There"`
+are *strings*. They are not numbers. So what about `"1"` and `"2"`,
+with the quotation marks? They too are strings, precisely *because* of
+the quotation marks. That means that `1` and `2` are numbers, and if
+we add them we get `3`. But `"1"` and `"2"` are strings - words! - and if
+we add them together we get "12".
+
+Okay, so back to our previous program, repeated here for clarity:
+
+```python
+# Example of how to get user input from keyboard
+name = input("What is your name? ")
+print(f"Hello, {name}! Nice to meet you!")
+
+age = input("How old are you? ")
+```
+
+The function `input` always returns strings, such as `"Enfors"` or
+`"43"`, even if we type in numbers when we run it. But that's a
+problem we can handle by using a new function we haven't talked about
+before - the `int` function. The `int` function can take a string
+variable and convert it to an integer - a number. Let's do just that,
+also remembering to add a comment to explain what we're doing. While
+we're at it, we'll also add another `print` to display the age that
+the user typed:
+
+```python
+# Example of how to get user input from keyboard
+name = input("What is your name? ")
+print(f"Hello, {name}! Nice to meet you!")
+
+age = input("How old are you? ")
+# Use int() function to convert input to integer
+age = int(age)
+print(f"Oh I see, you're {age} years old.")
+```
+
+In the same way that the `input` function "returns" what the user
+types, the `int` function "returns" an integer. So just having
+`int(age)` in our program is not enough, because then we're not
+storing the return value (the number). That's why we need to type `age
+= int(age)`. Then we're grabbing what the function `int` returns, and
+storing it in our `age` variable.
+
+Now when we save (`Control-s`) and run (`F5`) our program, we get the
+following result:
+
+```
+What is your name? Enfors
+Hello, Enfors! Nice to meet you!
+How old are you? 43
+Oh I see, you're 43 years old.
 ```
 
 Exercise
 --------
 
+Let's combine what we've learned in this part with what we learned in
+[Part 1](../001-intro/). Write a program that asks the user for a
+height and a width, remembering to convert them into integers. Then,
+calculate the area and display it. You will get an example of how to
+do it in the next part.
+
+Previous: [Part 1: Introduction](../001-intro/) | Next: *Coming soon* &#153;
+| [Index](../)
