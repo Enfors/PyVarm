@@ -1,0 +1,53 @@
+title: Part 2: User Input
+---
+body:
+
+As explained earlier, the Short version below is for experiences
+programmers. If you are not, proceed to the Full version below it.
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+Create a new file, and call it `user_input.py`:
+
+```python
+# Example of how to get user input from keyboard
+name = input("What is your name?")
+print(f"Hello, {name}! Nice to meet you!")
+
+age = input("How old are you?")
+# Use int() function to convert input to integer
+age = int(age)  # age = int(input(...)) works too
+print(f"Oh I see, you're {age} years old.")
+```
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Answer to the exercise in Part 1**
+
+Let's start with showing the answer to the exercise from [Part
+1](../001-intro/).
+
+```python
+# Simple Hello world example (this is a comment).
+print("Hello world!")
+
+# Create some variables
+height = 42
+width = 15
+depth = 20
+
+# Calculate area by multiplying height with width
+area = height * width
+volume = height * width * depth
+
+# Note the 'f' before the string in the following line.
+# It's why we can use {area} to print its value.
+print(f"The area is {area}.")
+print(f"The volume is {volume}.")
+```
+
+Exercise
+--------
+

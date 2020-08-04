@@ -1,6 +1,23 @@
-title: Python for Absolute Beginners
+title: Python for Absolute Beginners and Experienced Programmers
 ---
 body:
 
-- Part 1: [Introduction](001-intro/)
+Welcome to Python for Absolute Beginners and Experienced Programmers!
+In this tutorial we cover the basics of programming in Python. Each
+part has two sections:
+
+1. **The short version** which very quickly summarizes the materials
+   covered. This is useful if you're an experienced programmer, just
+   new to Python.
+1. **The long version** is intended for the absolute beginners, who
+   have no previous programming experience.
+   
+***
+
+- Part 1: [Introduction](001-intro/). How to install Python, and how
+  to take your first small steps as a Python programmer. We cover the
+  `print` function, integer variables and how to multiply them.
+  
+- Part 2: [User input](002-user-input/). How to get user input from the
+  keyboard, and how to do something interesting with it.
 
