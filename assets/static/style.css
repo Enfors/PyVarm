@@ -28,26 +28,28 @@ body {
     font-family: 'Verdana', sans-serif;
     font-size: 16px;
     margin: 0px auto;
+/*    background: #cccccc; */
 }
 
 a {
-    color: #2a99b6;
+    color: #204070;
 }
 
 a:hover {
-    color: #33bbdf;
+    color: #5080c0;
 }
 
 header, footer, div.page {
     width: 100%;
-    padding: 10px 0px;
-    background: #a0bbf3;
+    padding: 10px 5px;
+    background: #70a0f0;
     font-size: 16px;
 }
 
 header h1 {
-    color: #eeeeff;
-    font-weight: normal;
+    color: #c0d0f0;
+    font-weight: bold;
+    font-style: italic;
     font-size: 40px;
 }
 
@@ -77,11 +79,13 @@ div.page {
     header {
         margin: 20px auto 0px auto;
         border-radius: 20px 20px 0px 0px;
+        /* background-image: linear-gradient(to bottom, #d0f0f8, #7090e0); */
     }
 
     footer {
         margin: 0px auto 20px auto;
         border-radius: 0px 0px 20px 20px;
+        /* background-image: linear-gradient(to bottom, #c0e0f3, #809bf3); */
     }
 
     h1 {
