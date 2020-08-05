@@ -1,3 +1,29 @@
+/* For responsive web */
+* {
+    box-sizing: border-box;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  border: 1px solid red;
+}
+
+/* End responsive web */
+
 body {
     font-family: 'Verdana', sans-serif;
     font-size: 16px;
@@ -13,17 +39,18 @@ a:hover {
 }
 
 header, footer, div.page {
-    width: 760px;
-    margin: 0 auto;
-/*    background: #daeef3; */
-    background: #bbbbf3;
-    padding: 20px 30px;
+    width: 100%;
+    padding: 10px 20px;
+    background: #a0bbf3;
+    font-size: 16px;
+}
+
+body {
+    margin: 0px auto;
 }
 
 header h1 {
-/*    color: #169bbd; */
     color: #eeeeff;
-    margin: 0;
     font-weight: normal;
     font-size: 50px;
 }
@@ -32,6 +59,7 @@ header nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    font-size: 24px;
 }
 
 header nav ul li {
@@ -41,5 +69,16 @@ header nav ul li {
 }
 
 div.page {
-    background: #d1d1fe;
+    background: #c1d1fe;
+}
+
+@media only screen and (min-width: 900px) {
+    header, footer, div.page {
+        width: 760px;
+        margin: 0px auto;
+    }
+
+    body {
+        margin: 0px 0px;
+    }
 }
