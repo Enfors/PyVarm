@@ -28,7 +28,7 @@ body {
     font-family: 'Verdana', sans-serif;
     font-size: 16px;
     margin: 0px auto;
-/*    background: #cccccc; */
+    background: #aaaaaa;
 }
 
 a {
@@ -44,6 +44,11 @@ header, footer, div.page {
     padding: 10px 5px;
     background: #70a0f0;
     font-size: 16px;
+}
+
+div.page {
+/*    background: #c1d1fe; */
+    background: white;
 }
 
 header h1 {
@@ -65,14 +70,10 @@ header nav ul li {
     padding: 0;
 }
 
-div.page {
-    background: #c1d1fe;
-}
-
 @media only screen and (min-width: 900px) {
     header, footer, div.page {
         width: 760px;
-        margin: 0px auto;
+        margin: 5px auto;
         padding: 10px 20px;
     }
 
@@ -88,10 +89,17 @@ div.page {
         /* background-image: linear-gradient(to bottom, #c0e0f3, #809bf3); */
     }
 
-    h1 {
-        font-size: 60px;
+    div.page {
+        background: #cccccc;
     }
 
+    div.blog-post {
+        border-radius: 8px;
+        background: white;
+        padding: 5px;
+        margin: 5px 0px 0px 0px;
+    }
+    
     body {
         margin: 0px 0px;
     }
