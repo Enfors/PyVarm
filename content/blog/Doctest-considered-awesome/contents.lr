@@ -18,7 +18,7 @@ you how.
 body:
 
 How documentation strings work in Python functions
-==================================================
+--------------------------------------------------
 
 Let's say you have a file with a function which adds two numbers
 together. Such a function obviously isn't useful, but I'll use it as a
@@ -58,7 +58,7 @@ add_two_numbers(a, b)
 ```
 
 Enter doctest
-=============
+-------------
 
 Okay, now that we know the basics of documentation strings, let's add
 some tests to them. First, we need to launch a Python interpreter and
@@ -154,7 +154,7 @@ That helps us locate the bug, and fix it (do that now, so you don't
 get these errors again).
 
 Testing print statements
-========================
+------------------------
 
 Apart from testing the return values of functions, you can also test
 what they print - anything you can see the output of in the
@@ -210,7 +210,7 @@ Got:
 ```
 
 A quick recap
-=============
+-------------
 
 So, to recap how to use `doctest`:
 
@@ -223,7 +223,7 @@ So, to recap how to use `doctest`:
 4. Test it with `python3 -m doctest my_file.py`
 
 Conclusion
-==========
+----------
 
 That's all you need to know to start using `doctest`. As experienced
 developers can tell, you can't use `doctest` for all kinds of
