@@ -9,6 +9,52 @@
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
 <link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+
+<script>
+// Cookie Compliancy BEGIN
+// Code from:
+// https://html-online.com/articles/cookie-warning-widget-with-javascript/  
+function GetCookie(name) {
+  var arg=name+"=";
+  var alen=arg.length;
+  var clen=document.cookie.length;
+  var i=0;
+  while (i<clen) {
+	var j=i+alen;
+	if (document.cookie.substring(i,j)==arg)
+	  return "here";
+	i=document.cookie.indexOf(" ",i)+1;
+	if (i==0) break;
+  }
+  return null;
+}
+function testFirstCookie(){
+	var offset = new Date().getTimezoneOffset();
+	if ((offset >= -180) && (offset <= 0)) { // European time zones
+		var visit=GetCookie("cookieCompliancyAccepted");
+		if (visit==null){
+		   $("#myCookieConsent").fadeIn(400);	// Show warning
+	   } else {
+			// Already accepted
+	   }		
+	}
+}
+$(document).ready(function(){
+    $("#cookieButton").click(function(){
+		console.log('Understood');
+		var expire=new Date();
+		expire=new Date(expire.getTime()+7776000000);
+		document.cookie="cookieCompliancyAccepted=here; expires="+expire+";path=/";
+        $("#myCookieConsent").hide(400);
+    });
+	testFirstCookie();
+});
+// Cookie Compliancy END
+  
+</script>
+
 <body>
   <header>
     <title>{% block title %}Welcome{% endblock %} — Python V&auml;rmland</title>
@@ -23,6 +69,7 @@
           ['/tutorials', 'Tutorials'],
           ['/meetups',   'Meetups'],
           ['/staff',     'Staff'],
+          ['/privacy',   'Privacy'],
          ] %}
           <li{% if this.is_child_of(href) %} class="active"{% endif
             %}><a href="{{ href|url }}">{{ title }}</a></li>
@@ -36,4 +83,10 @@
   <footer>
     &copy; Copyright 2020 by Christer Enfors.
   </footer>
+  <div id="myCookieConsent">
+    <a id="cookieButton">Understood</a>
+    <div>This&nbsp;website is&nbsp;using&nbsp;cookies.
+      <a href="/privacy/">
+        More&nbsp;details</a></div>
+  </div>
 </body>
