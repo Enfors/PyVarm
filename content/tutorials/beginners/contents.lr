@@ -21,3 +21,5 @@ part has two sections:
 - Part 2: [User input](002-user-input/). How to get user input from the
   keyboard, and how to do something interesting with it.
 
+- Part 3: [If statements and indentation](003-if-statements/). How to
+  make decisions in a program.

@@ -218,5 +218,6 @@ height and a width, remembering to convert them into integers. Then,
 calculate the area and display it. You will get an example of how to
 do it in the next part.
 
-Previous: [Part 1: Introduction](../001-intro/) | Next: *Coming soon* &#153;
-| [Index](../)
+Previous: [Part 1: Introduction](../001-intro/) |
+Next: [Part 3: If statements and indentation](../003-if-statements/) |
+[Index](../)

@@ -1,0 +1,24 @@
+These are my planning notes for upcoming tutorial parts. This file
+does not show up on the website. But if I'm wrong and it does show up
+so someone can see it, then HELLO READER!
+
+* Completed parts
+
+1. Print and variables
+2. User input
+
+* Planned, numbered parts
+
+1. If statements and indentation
+2. While loops (number guessing game)
+3. Lists
+
+* Planned, unnumberd parts
+
+- defining functions
+- the Python interpreter
+- for loops and lists
+- importing and using modules
+  - finding them
+  - built-in
+  - 3rd party

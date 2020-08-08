@@ -1,0 +1,274 @@
+title: Part 3: If statements and indentation
+---
+body:
+
+Now it's time to look at Python's `if` statement. They are used to
+make decisions - for example, in a number guessing game, we can use
+`if` to say that "if the user's guess is correct, then end the game",
+and so on. We'll start with the short version; if you're new to
+Python, then skip ahead to the full version below it.
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+Create a new file, and call it `if_statements.py`:
+
+```python
+# How if statements work in Python
+answer = input("Which is the best movie ever made? ")
+
+# Don't miss the colon at the end of the if line.
+if answer == "Quest for the Holy Grail":
+    # Note the indentation. Whitespace is SIGNIFICANT
+    # in Python. It's used to denote blocks, rather
+    # than curly braces or similar.
+    print("Correct! And there was much rejoicing.")
+elif answer == "Life of Brian":  # elif == else if
+    print("Close, but not quite right.")
+else:
+    print("Wrong answer! Ni! Ni! NI!!")
+
+# Ask user for age, and check if they are a teenager
+# Use int() to convert from string to int
+age = int(input("How old are you? "))
+
+# 'and', 'or', and 'not' works as expected
+if age >= 13 and age <= 19:
+    print("You are a teenager.")
+else:
+    print("You are NOT a teenager.")
+```
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Answer to the exercise in Part 2**
+
+Here's one possible answer to the exercise from [Part
+2](../002-user-input/).
+
+```python
+height = input("Please enter height: ")
+width = input("Please enter width: ")
+
+height = int(height)
+width = int(width)
+
+area = height * width
+
+print(f"The area is {area}.")
+```
+
+Okay! Now it's time to learn how `if` statements work.
+
+**If statements**
+
+"`if`" is a very important statement in programming. It lets you make
+decisions, and handle situations differently depending on various
+circumstances. It's not as complicated as it might sound - let me show
+you an example. Go to IDLE, and create a new file (`File`, then `New
+file` in the menu).
+
+```python
+answer = input("Which is the best movie ever made?")
+
+if answer == "Quest for the Holy Grail":
+    print("Correct! And there was much rejoicing.")
+```
+
+Save it (`Control-s`, giving it the name `if-statements.py`), and run
+it (`F5`). If you've done everything correctly, you will see the
+message:
+
+```
+Which is the best movie ever made? Quest for the Holy Grail
+Correct! And there was much rejoicing.
+```
+
+If you type something other than exactly `Quest for the Holy Grail`,
+you will get no response at all. We'll fix that in a moment, but first
+let's go through his little program line by line and see how it works.
+
+```python
+answer = input("Which is the best movie ever made? ")
+```
+
+Here, we ask the user for their choice of best movie ever by using the
+`input` function we learned about in [Part 2: User
+input](../002-user-input/).
+
+The two last lines are more interesting:
+
+```python
+if answer == "Quest for the Holy Grail":
+    print("Correct! And there was much rejoicing.")
+```
+
+We start the first line with "`if`". Then, we have what is known as a
+"condition" where we compare, using `==` (not just a single equals
+sign), the user's answer to the correct answer. We end the line with a
+colon. If the condition "is true" as a programmer would put it - if
+the user's answer is indeed equal to the correct answer - then we will
+continue to the next line which prints a message.
+
+**Indentation**
+
+Now is the time to bring up "indentation" in Python. As you can see,
+the print line is "indented" by four spaces (always use four spaces,
+and nothing else - no tabs, not two spaces - use four spaces).
+Whenever you have an `if` statement, it must be followed by an
+indented "block" - that is, the following line or lines must be
+indented compared to the `if` line. All those lines that are indented,
+will only be executed if the `if` statement is true.
+
+**The `else` clause**
+
+Sometimes, you also want to do something if the condition after the
+`if` statement *isn't* true. Think of it like this: "if the closest
+store is open, then go there. Otherwise, go to the 24/7 supermarket."
+Or, to put it in slightly more Python-like terms:
+
+```
+if the closest store is open:
+    go there
+else:
+    go to the 24/7 supermarket
+```
+
+Note that the above isn't proper Python code though. However, let's
+write some proper code - let's add to our previous `if-statements.py`
+program: 
+
+```python
+answer = input("Which is the best movie ever made?")
+
+if answer == "Quest for the Holy Grail":
+    print("Correct! And there was much rejoicing.")
+else:
+    print("Wrong answer! Ni! Ni! NI!!")
+```
+
+Let's see what happens if we run that, and we give it the name of
+another movie instead:
+
+```
+Which is the best movie ever made? The water boy
+Wrong answer! Ni! Ni! NI!!
+```
+
+That works as expected. Nice! But what if you want to have several
+different "elses"? You can solve that with something called `elif`,
+which is short for "else if":
+
+```python
+answer = input("Which is the best movie ever made?")
+
+if answer == "Quest for the Holy Grail":
+    print("Correct! And there was much rejoicing.")
+elif answer == "Life of Brian":
+    print("Close, but not quite right.")
+else:
+    print("Wrong answer! Ni! Ni! NI!!")
+```
+
+See how that works? You can have one `if`, then you can have as many
+`elif`s as you want (or none), and then you can have an `else` if you
+want.
+
+**Other comparison operators**
+
+We've used `==` in our conditions so far (remember, if we have `if
+answer == "yes"`, then the "condition" is `answer == "yes"`). So we
+can use `==` to check if something is "equal" to something else. But
+what if we want to check if something is *not* equal to something
+else? Well, the good news is that there are several types of
+"comparison operators", as they're called. Here's a table of some of
+the most important ones.
+
+|Operator |Purpose               |
+|:--------|:---------------------|
+|==       |equals                |
+|!=       |not equals            |
+|<        |less than             |
+|>        |greater than          |
+|<=       |less than or equal    |
+|>=       |greater than or equal |
+
+As you can see in the table above, if we want to check if something is
+different from something else - if it is "not equal to", we use the
+`!=` comparison operator:
+
+```python
+if user_input != "yes":
+    print("Okay, let's not do that then.")
+```
+
+Some comparison operators make more sense when used with numbers:
+
+```python
+if age > 17:
+    print("You are considered an adult.")
+else:
+    print("You are not yet considered an adult.")
+```
+
+**and / or operators**
+
+You can also use the words `and` / `or` in your conditions:
+
+```python
+if age >= 13 and age <= 19:
+    print("You are a teenager.")
+else:
+    print("You are NOT a teenager.")
+```
+
+What we've done here is we have taken *two* conditions (`age >= 13`),
+followed by (`age <= 19`), and put the word `and` between them, which
+means that *both* conditions must be true, just like in the sentence
+"if your age is more than or equal to 13 *and* your age is less than
+or equal to 19, then you are a teenager". 
+
+Here's a slightly different way of accomplishing the same thing, only
+with using the operator `or` instead of `and`:
+
+```python
+if age < 13 or age > 19:
+    print("You are NOT a teenager.")
+else:
+    print("You are a teenager.")
+```
+
+As you might have guessed, this basically says "if your age is less
+than 13, *or* your age is greater than 19, then you are NOT a
+teenager."
+
+Exercise
+--------
+
+Now it's time to put what we have learned to the test. You know how
+people sometimes say that a dog year is about the same as seven human
+years? This is not entirely accurate, but for the sake of this
+excercise, let's ignore that fact.
+
+Your task is to make a program that compares a human's age to that of
+a dog (converted into "human years"). That is to say, multiply a dog's
+age by seven, and check if it is higher, equal, or lower than a
+human's age. If you don't have a dog, just pretend that you do and
+make up an age for it.
+
+Some pointers:
+
+* Have to program ask for the user's age, as well as the dog's age.
+* In [Part 2: User input](../002-user-input/) we learned how to ask
+  the user a question using the function `input`.
+* Also, remember that we have to convert the user's response to a
+  proper integer using the function `int`.
+* You can multiply using an asterisk, `*`.
+* Have the program tell the user if the dog is younger, older, or the
+  same age as them.
+  
+You will find a suggested solution in the next part. Until then!
+
+Previous: [Part 2: User input](../002-user-input/) | Next: *Coming
+soon* &#153; | [Index](../)
