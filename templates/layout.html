@@ -2,60 +2,60 @@
 <head>
   <!-- The following line is for Google AdSense. -->
   <script data-ad-client="ca-pub-6896093529276182" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</head>
 
-<!-- From https://www.w3schools.com/css/css_rwd_viewport.asp: -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- From https://www.w3schools.com/css/css_rwd_viewport.asp: -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="utf-8">
-<link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
+  <link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
 
-<script>
-// Cookie Compliancy BEGIN
-// Code from:
-// https://html-online.com/articles/cookie-warning-widget-with-javascript/  
-function GetCookie(name) {
-  var arg=name+"=";
-  var alen=arg.length;
-  var clen=document.cookie.length;
-  var i=0;
-  while (i<clen) {
-	var j=i+alen;
-	if (document.cookie.substring(i,j)==arg)
-	  return "here";
-	i=document.cookie.indexOf(" ",i)+1;
-	if (i==0) break;
-  }
-  return null;
-}
-function testFirstCookie(){
+  <script>
+    // Cookie Compliancy BEGIN
+    // Code from:
+    // https://html-online.com/articles/cookie-warning-widget-with-javascript/
+    function GetCookie(name) {
+        var arg=name+"=";
+        var alen=arg.length;
+        var clen=document.cookie.length;
+        var i=0;
+        while (i<clen) {
+	    var j=i+alen;
+	    if (document.cookie.substring(i,j)==arg)
+	        return "here";
+	    i=document.cookie.indexOf(" ",i)+1;
+	    if (i==0) break;
+        }
+        return null;
+    }
+    function testFirstCookie(){
 	var offset = new Date().getTimezoneOffset();
 	if ((offset >= -180) && (offset <= 0)) { // European time zones
-		var visit=GetCookie("cookieCompliancyAccepted");
-		if (visit==null){
-		   $("#myCookieConsent").fadeIn(400);	// Show warning
-	   } else {
-			// Already accepted
-	   }		
+	    var visit=GetCookie("cookieCompliancyAccepted");
+	    if (visit==null){
+		$("#myCookieConsent").fadeIn(400);	// Show warning
+	    } else {
+		// Already accepted
+	    }
 	}
-}
-$(document).ready(function(){
-    $("#cookieButton").click(function(){
-		console.log('Understood');
-		var expire=new Date();
-		expire=new Date(expire.getTime()+7776000000);
-		document.cookie="cookieCompliancyAccepted=here; expires="+expire+";path=/";
-        $("#myCookieConsent").hide(400);
-    });
+    }
+    $(document).ready(function(){
+        $("#cookieButton").click(function(){
+	    console.log('Understood');
+	    var expire=new Date();
+	    expire=new Date(expire.getTime()+7776000000);
+	    document.cookie="cookieCompliancyAccepted=here; expires="+expire+";path=/";
+            $("#myCookieConsent").hide(400);
+        });
 	testFirstCookie();
-});
-// Cookie Compliancy END
-  
-</script>
+    });
+    // Cookie Compliancy END
+
+  </script>
+</head>
 
 <body>
   <header>
