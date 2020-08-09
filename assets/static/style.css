@@ -78,6 +78,11 @@ div.page {
     background: #c1d1fe;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* DESKTOP VERSION */
 
 @media only screen and (min-width: 900px) {
@@ -108,6 +113,10 @@ div.page {
 
     pre {
         font-size: 14px;
+    }
+
+    img {
+        max-width: 50%;
     }
 }
 
