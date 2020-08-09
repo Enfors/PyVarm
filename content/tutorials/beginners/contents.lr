@@ -14,12 +14,15 @@ part has two sections:
    
 ***
 
-- Part 1: [Introduction](001-intro/). How to install Python, and how
+- [Part 1: Introduction](001-intro/). How to install Python, and how
   to take your first small steps as a Python programmer. We cover the
   `print` function, integer variables and how to multiply them.
   
-- Part 2: [User input](002-user-input/). How to get user input from the
+- [Part 2: User input](002-user-input/). How to get user input from the
   keyboard, and how to do something interesting with it.
 
-- Part 3: [If statements and indentation](003-if-statements/). How to
+- [Part 3: If statements and indentation](003-if-statements/). How to
   make decisions in a program.
+
+- [Part 4: While loops](004-while-loops/). One way of making the
+  computer do the same thing, many times.

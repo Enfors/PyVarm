@@ -1,0 +1,226 @@
+title: Part 4: While loops
+---
+body:
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+While loops work as you'd expect in Python.
+
+```python
+number = 1
+
+while number != 10:
+    print(number)
+    number = number + 1
+```
+
+Note the importance of the indentation - it denotes the loop block.
+Again, whitespace is significant in Python. **Always use four spaces
+to indent. No tabs, no two spaces. Use four spaces.**
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Answer to the exercise in Part 3**
+
+Here's one possible answer to the exercise from [Part
+3](../003-if-statements/).
+
+```python
+user_age = input("How old are you? ")
+dog_age = input("How old is the dog? ")
+
+user_age = int(user_age)
+dog_age = int(dog_age)
+
+# Convert the dog's age to "human years".
+dog_age = dog_age * 7
+
+print(f"The dog's age in human years is {dog_age}.")
+
+if dog_age < user_age:
+    print("The dog is younger than you.")
+elif dog_age == user_age:
+    print("The dog is the same age as you.")
+else:
+    print("The dog is older than you.")
+```
+
+You might be wondering why we didn't use the "greater than" `>=`
+operator to make sure the dog is older than the user at the end.
+That's because we don't have to - we have already made sure that the
+dog isn't younger than the user, and not the same age either. The only
+possibility that remains is that it is older than the user.
+
+**while loops**
+
+Loops are an essential part of all kinds of programming. It allows you
+to tell the computer to do the same thing over and over, a number of
+times. Let's have a look at a very simple example.
+
+```python
+number = 0
+
+while number < 10:
+    print(number)
+    number = number + 1
+```
+
+Previously, we've printed variabled by writing `print(f"{number}")`,
+but now we're just typing `print(number)`. How come? That's because
+now we only want to print the number, and nothing else. If, however,
+we want to print the number as part of a sentence (technically, as
+part of a "string"), we have to use the `print(f"The number is
+{number}.")` syntax.
+
+Anyway, when we run the program above, we get:
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+We only have the one print statement, but we still get 10 numbers
+printed. Why? That's because we're printing *inside a loop* -
+something that repeats several times.
+
+If we translate the above program into english, it would be something
+like:
+
+```
+Set the variable "number" to 0
+
+While the variable "number" is less than 10, do this:
+    Print the variable "number"
+    Increase the variable "number" by 1
+```
+
+In other words, when we run through the loop the first time, the
+variable `number` is set to 0, and subsequently, `0` is printed. Then,
+`number` is increased by 1 by the line `number = number + 1`. That
+might seem confusing, but think of it as meaning "set number to what
+it already is (0), plus 1", which means that it now becomes 1. Then,
+we start back from the `while` line again. Since `number`, which is
+now 1, is still less than 10, the program will run through the loop
+again. This time, `number` will be increased from 1 to 2. After
+another few loops, `number` will be increased to from 9 to 10. But
+then when we get back to the `while` line, the loop will stop, because
+`number` is no longer *less* than 10. Therefore, the program ends
+after the 9 has been printed.
+
+**Let's make a simple game**
+
+Now we're going to make a simple number guessing game. The computer
+will randomly decide on a number, that the user will have to guess.
+After each guess, the computer will tell us if the number is correct,
+too low, or too high. That's where the `while` loop comes in. "While
+the guess is not correct", we will continue the loop. When we
+eventually get a correct guess, the loop will exit and we can print a
+"well done" message.
+
+**Modules**
+
+But first, we need to take a brief moment to talk about Python
+"modules". We've used a few functions in the past, such as `print`,
+`input`, and `int`. Those functions are available to us from the
+get-go - we can just use them any time we want. Some functions,
+however, reside in "modules" which we must "import" in order to be
+able to use them. Python comes with a standard library consisting of a
+large number of very useful functions. One of these is the `random`
+function, which (among other things) contains the `randint` function
+which gives us a random integer.
+
+This simple program shows us how this works.
+
+```python
+import random
+
+number = random.randint(1, 10)
+```
+
+As you can see, we don't just type `number = randint(1, 10)`. That's
+because we need to tell Python *which* randint function we want. In
+theory, there could be another function with the same name in a
+different module, therefore we use the syntax
+"modulename.functionname" to call functions from modules.
+
+The 1 and 10 inside randint's parentesis are called "arguments", They
+tell the function that we want the random integer to be no lower than
+1, and no higher than 10.
+
+**Now for the game itself**
+
+Now that we understand the basics of modules, it's time to get to the
+game itself. Open `IDLE`, go to `File` and then `New file` and type in
+the following (copy & paste is cheating; you learn more efficiently if
+you type it in yourself):
+
+```python
+# Make Python's "random" module available to us
+import random
+
+# In the random module, there's a function called
+# randint. We can use it to give us any integer from
+# 1 to 100.
+number = random.randint(1, 100)
+
+print("I'm thinking of a number between 1 and 100.")
+print("Try to guess which one it is.")
+
+# Let's give the guess variable a starting number
+# that we know will never be correct.
+guess = 0
+
+# Until guess is equal to the number, repeat this
+# loop:
+while guess != number:
+    guess = input("What's your guess? ")
+    guess = int(guess)  # Convert guess to integer
+
+    # Check if it is too low or too high
+    if guess < number:
+        print("Your guess is too low.")
+    elif guess > number:
+        print("Your guess is too high.")
+
+# We have now exited the loop, which means that
+# guess must be equal to number, IE, correct.
+print("Correct! Well done!")
+```
+
+Now, save it (`Control-s`) giving it the name `number_guess.py`, then
+run it (`F5`). If somehow it doesn't work and you get stuck, you can
+always exit the program by pressing `Control-c`.
+
+![Foo](Hagalund-winter-panorama.jpg)
+
+
+Exercise
+--------
+
+As we've mentioned before, the key to really learning how to program
+is to experiment, and to alter code to see what happens. So in that
+spirit, make the following three changes to the number guessing game:
+
+1. When the game ends, ask the user if they would like to play again
+   by answering "y" or "n". Hint: You will need another *outer* while
+   loop for this.
+2. When the game starts, ask the user for what the highest possible
+   number should be, instead of always using 100. Remember that you
+   will need to convert the answer like we've done before, once you
+   get it from the user.
+3. Change the program so that it keeps track of how many guesses it
+   takes to get it right, and then print that number when the game
+   ends.
+
+Previous: [Part 3: If statements](../003-if-statements/) | Next: *Coming
+soon* &#153; | [Index](../)

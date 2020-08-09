@@ -6,18 +6,17 @@ so someone can see it, then HELLO READER!
 
 1. Print and variables
 2. User input
+3. If statements and indentation
 
 * Planned, numbered parts
 
-1. If statements and indentation
-2. While loops (number guessing game)
-3. Lists
+1. While loops (number guessing game)
+2. Lists and for loops
 
 * Planned, unnumberd parts
 
 - defining functions
 - the Python interpreter
-- for loops and lists
 - importing and using modules
   - finding them
   - built-in
