@@ -8,10 +8,10 @@ tutorials.
 If you're totally new to Python
 -------------------------------
 
-- [Python for Absolute Beginners](beginners/) is a good
-  starting point if you're new to Python. It is written in a way that
-  makes it useful both to people who are completely new to
-  programming, as well as for people who are experienced with other
+- [Python for Absolute Beginners](beginners/) is a good starting point
+  if you're new to Python. It contains many parts, and it is written
+  in a way that makes it useful both to people who are completely new
+  to programming as well as for people who are experienced with other
   programming languages.
 
 For experienced Python developers
