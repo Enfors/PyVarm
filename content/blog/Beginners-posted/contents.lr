@@ -1,0 +1,30 @@
+title: New tutorial: Python for Beginners
+---
+pub_date: 2020-08-12
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+I have written and posted the first four parts of a tutorial called
+[Python for Absolute Beginners and Experienced
+Programmers](/tutorials/beginners/) in the new
+[Tutorials](/tutorials/) section. The tutorial aims to be easy to
+follow even if you never programmed before. Each part also contains a
+"Short version" for people with experience in other programming
+languages that don't need to have the concept of "if" statements
+explained to them, but rather just need to know the Python syntax for
+them.
+
+---
+body:
+
+Each part of the tutorial ends with an exercise, the answer of which
+is revealed in the next part. The aim is to expand on this tutorial,
+hopefully adding at least one part per week for now. Once we have
+around ten to fifteen parts, I suspect that will be "good enough";
+even if you're a complete beginner, after you've read (and done the
+exercises of) that many parts, I think you should have an easier time
+than before in following other more advanced tutorials.
