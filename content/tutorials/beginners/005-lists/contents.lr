@@ -1,0 +1,277 @@
+title: Part 5: Lists and for loops
+---
+body:
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+
+```python
+names = ["Anna", "Betty", "Christine"]
+
+for name in names:
+    print(name)
+```
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Answer to the exercise in Part 4**
+
+Here's one possible answer to the exercise from [Part
+4](../004-while-loops/).
+
+```python
+# Make Python's "random" module available to us
+import random
+
+# keep_playing will tell us if the player wants to
+# continue or not. For now, let's assume "yes".
+keep_playing = "y"
+
+# To allow the player to play many times, we add a
+# while loop around the game code itself. Please
+# note that this means that all our previous code
+# has to be indented another four spaces, to tell
+# the computer that it's part of the new while
+# loop
+while keep_playing == "y":
+
+    max_number = input("Highest number for guess? ")
+    max_number = int(max_number)
+
+    # In the random module, there's a function called
+    # randint. We can use it to give us any integer
+    # from 1 to max_number.
+    number = random.randint(1, max_number)
+
+    print(f"I'm thinking of a number between 1 and {max_number}.")
+    print("Try to guess which one it is.")
+
+    # Let's give the guess variable a starting number
+    # that we know will never be correct.
+    guess = 0
+
+    # Keep track of how many guesses the player has used.
+    num_guesses = 0
+
+    # Until guess is equal to the number, repeat this
+    # loop:
+    while guess != number:
+        guess = input("What's your guess? ")
+        guess = int(guess)  # Convert guess to integer
+
+        # num_guesses += 1 is a shorthand for:
+        # num_guesses = num_guesses + 1
+        num_guesses += 1
+
+        # Check if it is too low or too high
+        if guess < number:
+            print("Your guess is too low.")
+        elif guess > number:
+            print("Your guess is too high.")
+
+    # We have now exited the loop, which means that
+    # guess must be equal to number, IE, correct.
+    print(f"Correct! Well done! It took {num_guesses} guesses.")
+
+    keep_playing = input("Play another (y/n)? ")
+```
+
+**Lists**
+
+All the variables we've talked about so far have been a single point
+of data. But what if we want to keep track of, say, 10,000 people?
+Having that many ordinary variables would be very impractical.
+Therefore, there are other types of variables that we can use, and now
+we're going to be talking about one of them: lists.
+
+Making lists in Python is very simple:
+
+```python
+names = ["Anna", "Betty", "Christine"]
+print(names)
+```
+
+If we run that, we get the following output:
+
+```
+['Anna', 'Betty', 'Christine']
+```
+
+So, using a single variable - a list - called `names`, we could store
+three names. We could store more names of course, thousands or more if
+we wanted to.
+
+Before we continue - just a word of warning. Do not make a list called
+`list`. It will cause problems, because there is already a function in
+Python called `list`.
+
+As you may have noticed, all the entries in our list are string
+variables (you can tell, because of the quotation marks). But we can
+have other types of variables too:
+
+```python
+random_things = ["Hello", 4, "Saxophone", "Blue"]
+print(random_things)
+```
+
+and that gets us:
+
+```
+['Hello', 4, 'Saxophone', 'Blue']
+```
+
+You can also make empty lists, by not putting anything inside `[` and
+`]`:
+
+```python
+people_who_like_nickleback = []
+```
+
+**How to check how long a list is**
+
+With the `len` function (short for "length"), we can see how many
+entries there are in a list - that is, how long the list is.
+
+```python
+people_who_like_nickleback = []
+print(len(people_who_like_nickleback))
+```
+
+And that, of course, get us:
+
+```
+0
+```
+
+If you're confused by having the `len` function "inside" the
+parentheses of `len`, there is no need to be. What this does is it
+first calls the `len(people_who_like_nickleback)` function. It then
+takes that function's *return value* (which is zero, since that's the
+length of the list), and hands it off to the `print` function. So:
+
+```python
+# This:
+print(len(people_who_like_nickleback))
+
+# Becomes this:
+print(0)
+# since 0 is the return value of the len function
+# in this case, since the list is empty.
+```
+
+**How to access specific data in a list**
+
+Let's say you have a list of rooms in a house - here are some very
+useful ways of using that list:
+
+```python
+rooms = ["kitchen", "living room", "bathroom", "bedroom"]
+
+# Print all rooms
+print(rooms)
+
+# How many rooms are there?
+print(f"There are {len(rooms)} rooms")
+
+# Which is the first room in the list?
+print(f"First room: {rooms[0]}")
+# rooms[0] == first in the list
+
+# Which is the second room in the list?
+print(f"Second room: {rooms[1]}")
+# rooms[1] == second in the list
+
+# How about the LAST room?
+print(f"Last room: {rooms[-1]}")
+# rooms[-1] == the last
+
+# And the second to last room?
+print(f"Second to last: {rooms[-2]}")
+# rooms[-2] == second to last
+```
+
+When we run that, we get:
+
+```
+There are 4 rooms
+First room: kitchen
+Second room: living room
+Last room: bedroom
+Second to last: bathroom
+```
+
+By using `rooms[0]` you get the first and `rooms[1]` gives you the
+second, and so on. It might seem strange that it starts with 0 for the
+first, rather than having 1 for the first. It's like that for historic
+reasons, and most programming languages work that way so we just have
+to get used to it.
+
+Also, we see that `rooms[-1]` refers to the last entry in the list.
+So, why not `rooms[-0]` to make it consistent with `rooms[0]` being
+the first? Well, that's because `-0` doesn't make much sense - it's
+technically the same as `0`.
+
+If you try to access a list entry that doesn't exist, you will get an
+error similar to this:
+
+```python
+print(rooms[42])
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+```
+
+The important part to look at here is the last line: `IndexError: list
+index out of range`. The "index" is the number you put between `[`
+and `]`, or 42 in this case. And that is "out of range", where the
+"range" is 0, 1, 2, and 3 (since we have four rooms in our list).
+
+**Enough already - what about for loops?**
+
+Okay. We've now had a fairly extensive look at lists themselves. Now
+let's look at how we can *use* them in a more practical way. Take a
+look at this example:
+
+```python
+movies = ["Quest for the Holy Grail",
+          "Life of Brian",
+          "Kung Fury",
+          "Wonder Woman"]
+
+# for loops lets us go through lists.
+# We will go through this loop four times,
+# because there are four entries in the list.
+for movie in movies:
+    # The variable "movie" is now an entry
+    # from the list movies
+    print(movie)
+```
+
+This will get us:
+
+```
+Quest for the Holy Grail
+Life of Brian
+Kung Fury
+Wonder Woman
+```
+
+Neat, isn't it? `for` loops allow us to go through lists, setting a
+variable to each entry in the list in turn. On the other hand, `while`
+loops allow us to keep looping until a specific condition is no longer
+met, like we talked about in the [previous part](../004-while-loops/).
+So:
+
+1. Use `for` loops to go through lists, one item at a time.
+1. Use `while` loops to keep doing something until `answer ==
+   correct_answer` or something similar.
+
+Exercise
+--------
+
+Previous: [Part 4: While loops](../004-while-loops/) |
+Next: *Coming soon* &trade; |
+[Index](../)

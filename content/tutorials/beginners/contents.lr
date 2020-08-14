@@ -11,13 +11,13 @@ part has two sections:
    new to Python.
 1. **The long version** is intended for the absolute beginners, who
    have no previous programming experience.
-   
+
 ***
 
 - [Part 1: Introduction](001-intro/). How to install Python, and how
   to take your first small steps as a Python programmer. We cover the
   `print` function, integer variables and how to multiply them.
-  
+
 - [Part 2: User input](002-user-input/). How to get user input from the
   keyboard, and how to do something interesting with it.
 
@@ -26,3 +26,7 @@ part has two sections:
 
 - [Part 4: While loops](004-while-loops/). One way of making the
   computer do the same thing, many times.
+
+- [Part 5: Lists and for loops](005-lists/) explains how to store data
+  in a list instead of just in single variables, and how to use `for`
+  loops to go through such lists.

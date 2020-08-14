@@ -7,17 +7,18 @@ so someone can see it, then HELLO READER!
 1. Print and variables
 2. User input
 3. If statements and indentation
+4. While loops (number guessing game)
+5. Lists and for loops
 
 * Planned, numbered parts
 
-1. While loops (number guessing game)
-2. Lists and for loops
+6. Defining functions
 
 * Planned, unnumberd parts
 
-- defining functions
 - the Python interpreter
 - importing and using modules
   - finding them
   - built-in
   - 3rd party
+- floating numbers

@@ -219,5 +219,6 @@ spirit, make the following three changes to the number guessing game:
    takes to get it right, and then print that number when the game
    ends.
 
-Previous: [Part 3: If statements](../003-if-statements/) | Next: *Coming
-soon* &#153; | [Index](../)
+Previous: [Part 3: If statements](../003-if-statements/) |
+Next: [Part 5: Lists and for loops](../005-lists/) |
+[Index](../)
