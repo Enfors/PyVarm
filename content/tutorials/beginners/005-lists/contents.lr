@@ -7,10 +7,46 @@ The short version - for experienced programmers
 
 
 ```python
-names = ["Anna", "Betty", "Christine"]
+# LISTS
 
-for name in names:
-    print(name)
+rooms = ["kitchen", "living room", "bathroom", "bedroom"]
+
+# Print all rooms
+print(rooms)
+
+# How many rooms are there?
+print(f"There are {len(rooms)} rooms")
+
+# Which is the first room in the list?
+print(f"First room: {rooms[0]}")
+# rooms[0] == first in the list
+
+# Which is the second room in the list?
+print(f"Second room: {rooms[1]}")
+# rooms[1] == second in the list
+
+# How about the LAST room?
+print(f"Last room: {rooms[-1]}")
+# rooms[-1] == the last
+
+# And the second to last room?
+print(f"Second to last: {rooms[-2]}")
+# rooms[-2] == second to last
+
+# What if I want several entries?
+print(f"First two entries: {rooms[0:2]}")
+# rooms[0:2] or rooms[:2] == first two
+
+# Delete entry by index
+del rooms[0]
+
+# Delete by value
+rooms.remove("bathroom")
+
+# FOR LOOPS
+
+for room in rooms:
+    print(room)
 ```
 
 The full version - for beginner programmers
@@ -229,6 +265,69 @@ index out of range`. The "index" is the number you put between `[`
 and `]`, or 42 in this case. And that is "out of range", where the
 "range" is 0, 1, 2, and 3 (since we have four rooms in our list).
 
+**This is getting tedious**
+
+I know. Hang in there - there are just a few more things we need to
+cover about how to manipulate lists before we can move on to the
+slightly more interesting `for` loops.
+
+**How to add items to lists**
+
+To add something to the end of a list, you do this:
+
+```python
+rooms.append("man cave")
+```
+
+We have now added a fifth room - "man cave" - to the end of the list.
+If we instead want to insert a room at a specific point in a list, we
+use the `insert` function which takes two arguments (remember, the
+"arguments" are the things inside the parentheses): where to insert
+it, and what to insert.
+
+```python
+# 0 refers to where to insert it, so 0
+# means first in the list. 1 would be
+# in the second slot, etc. This does not
+# overwrite what is already there.
+# "laundry room" is what to insert.
+rooms.insert(0, "laundry room")
+```
+
+**What about removing things then?**
+
+There are two primary ways of doing that.
+
+1. If you know the *index* of the item you want to remove - in other
+   words, if you know what *number* it has in the list - then you use
+   `del`.
+2. If instead you know the value - the name of the room in our case -
+   then you use the `remove` function.
+
+```python
+# How to remove by index:
+# 2 == the third room (since 0 == the first)
+del rooms[2]
+
+# How to remove a room by name:
+rooms.remove("man cave")
+# Typical that the man cave is the room
+# that has to go, right?
+```
+
+But wait a minute - why is it `del rooms[2]` and not `rooms.del(2)`?
+That's a good question. The reason for this is because
+`rooms.remove()` is a function that "belongs" to the list. That
+function can only be used to remove things from lists. `del`, on the
+other hand, can be used to remove things both from lists and from
+other things - therefore, it doesn't "belong" to lists. This might
+sound a bit confusing, but don't worry about it. You don't even have
+to worry about remembering which one is which. Here's a little
+programmer secret for you: despite my 30+ years of programming
+experience, *I google stuff left and right all the time*. Even simple
+things like this. I had to google this while writing it. Don't feel
+like a failure if you google all the time too. We all do it.
+
 **Enough already - what about for loops?**
 
 Okay. We've now had a fairly extensive look at lists themselves. Now
@@ -269,8 +368,97 @@ So:
 1. Use `while` loops to keep doing something until `answer ==
    correct_answer` or something similar.
 
+**Let's make a proper program - list_maker.py**
+
+Time to do something useful. Well, sort of useful, we're not exactly
+expert programmers yet, but let's do our best. We are going to be
+making a very simple list-making program which we can then use to make
+grocery lists, todo lists, packing lists, or any other kind of simple
+list.
+
+So let's get to it! Open IDLE, go to `File` and `New file`. Type in
+the following:
+
+```python
+# Let's call our list 'items', since calling it
+# 'list' is a bad idea.
+
+items = []
+
+user_input = ""
+
+while user_input != "q":
+
+    if len(items) == 0:
+        print("The list is empty.")
+    else:
+        item_num = 0
+
+        for item in items:
+            print(f"{item_num}: {item}")
+            item_num += 1
+
+    # Just print an empty line
+    print()
+    user_input = input("Add item or quit (a/q)? ")
+
+    if user_input == "a":
+        new_item = input("What should I add? ")
+        items.append(new_item)
+
+print("Goodbye!")
+```
+
+There. Now save it (`Ctrl-s`), giving it the name `list_maker.py`, and
+then run it with `F5`. Here's what it looked like when I ran it:
+
+```
+The list is empty.
+
+Add item or quit (a/q)? a
+What should I add? Eggs
+0: Eggs
+
+Add item or quit (a/q)? a
+What should I add? Bacon
+0: Eggs
+1: Bacon
+
+Add item or quit (a/q)? a
+What should I add? Bread
+0: Eggs
+1: Bacon
+2: Bread
+
+Add item or quit (a/q)? a
+What should I add? Thunderpants
+0: Eggs
+1: Bacon
+2: Bread
+3: Thunderpants
+
+Add item or quit (a/q)? q
+Goodbye!
+```
+
 Exercise
 --------
+
+This little program above has some obvious missing features. One of
+these is that you can't delete items in the list. Therefore, your
+exercise is to add the following:
+
+1. It must be possible to delete items by pressing `d`.
+2. After the user has pressed `d`, but before you attempt to delete
+   anything, check if there are any items in the list. If there are
+   not, print a message saying so, and abort the deletion.
+3. If the list is not empty, ask the user for which item *number* to
+   delete, and then delete it.
+
+You do not have to worry about what happens if the user gives an
+invalid number to delete, such as `-3` or `431`. We will deal with
+that in later parts of this tutorial. Good luck! And remember:
+googling is okay!
 
 Previous: [Part 4: While loops](../004-while-loops/) |
 Next: *Coming soon* &trade; |
