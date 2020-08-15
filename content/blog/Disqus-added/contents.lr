@@ -1,0 +1,22 @@
+title: It's now possible to post comments
+---
+pub_date: 2020-08-15
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+I've added support for [Disqus](https://disqus.com) comments on all
+pages of the site, to enable discussions and asking questions.
+
+---
+body:
+
+I'm especially hoping that people will use this in the
+[Tutorial](/tutorials/) section to ask for clarifications where
+there's something they don't fully understand.
+
+This means that this site now uses additional cookies - to read more
+about that, head over to the [Privacy](/privacy/) section.
