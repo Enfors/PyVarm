@@ -78,6 +78,13 @@ div.page {
     background: #c1d1fe;
 }
 
+#disqus_thread {
+    background: #d8e1fe;
+    margin: 0px auto;
+    padding: 5px;
+/*    border-radius: 5px; */
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -113,6 +120,18 @@ img {
 
     pre {
         font-size: 14px;
+    }
+
+    #disqus_thread {
+        width: 720px;
+        background: #d8e1fe;
+        margin: 5px auto;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    comments {
+        background: red;
     }
 
     img {
