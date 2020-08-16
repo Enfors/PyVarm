@@ -1,0 +1,185 @@
+title: Part 6: Creating functions
+---
+body:
+
+The short version - for experienced programmers
+-----------------------------------------------
+
+
+```python
+pass
+```
+
+The full version - for beginner programmers
+-------------------------------------------
+
+**Answer to the exercise in Part 5**
+
+Here's one possible answer to the exercise from [Part
+5](../005-lists/).
+
+```python
+# Let's call our list 'items', since calling it
+# 'list' is a bad idea.
+
+items = []
+
+user_input = ""
+
+while user_input != "q":
+
+    if len(items) == 0:
+        print("The list is empty.")
+    else:
+        item_num = 0
+
+        for item in items:
+            print(f"{item_num}: {item}")
+            item_num += 1
+
+    # Just print an empty line
+    print()
+    user_input = input("Add, delete or quit (a/d/q)? ")
+
+    if user_input == "a":
+        new_item = input("What should I add? ")
+        items.append(new_item)
+
+    if user_input == "d":
+        if len(items) == 0:
+            print("There is nothing to delete.")
+        else:
+            delete_index = input("Enter number of item: ")
+            delete_index = int(delete_index)
+            del items[delete_index]
+
+print("Goodbye!")
+```
+
+**Functions**
+
+We've already used some of the functions that come ready-made with
+python, such as `print`, `input` and `len`. But you can also make
+functions on your own. Once you've seen how to make one, you'll soon
+understand what they are and what they're for. So let's dive in and
+make the simplest possible function we can.
+
+
+```python
+def say_hello():
+    print("Hello!")
+```
+
+The word `def` is used when creating a function. After it follows the
+name of the function you want to create (in this case `say_hello`),
+and then the name of its arguments (if any - in this case, there are
+none) inside parentheses and finally a colon. If there are no
+arguments, you still need the parentheses, you don't just put anything
+between them. Then, the entire contents of the function must be
+indented, just like with loops (which means that loops inside
+functions are at least doubly indented - once for being inside a
+function, and once for being a loop).
+
+After this, we can then call (read: use) the function by typing:
+
+```python
+say_hello()
+```
+
+And the not very surprising result will be:
+
+```
+Hello!
+```
+
+**Functions with arguments**
+
+Okay. That function was almost entirely pointless, let's make one
+that's a little more useful. Like this:
+
+```python
+def calculate_area(height, width):
+    area = height * width
+    return area
+```
+
+This creates a function called `calculate_area`. Unlike our previous
+`say_hello` function, this one takes two arguments - `height` and
+`width`. Using these, it calculates an area by simply multiplying them
+as one does. Then, we *return* the result. That means that the value
+from the `area` variable is *sent back* to where ever it was called.
+This means that we can now do this:
+
+```python
+area = calculate_area(10, 5)
+print(area)
+```
+
+And we will get the following:
+
+```
+50
+```
+
+If we don't want to keep the area - if we only want to print it, and
+that's it - then we can shorten it like this:
+
+```python
+print(calculate_area(10, 5))
+```
+
+In that case, the `50` which are returned from `calculate_area(10, 5)`
+are sent directly - as an argument - to the `print` function.
+
+**How about a function that's actually useful?**
+
+The functions we've made so far aren't really that useful - so let's
+make one that is. We will now rewrite and extend the `list_maker.py`
+program that we made in [Part 5](../005-lists/) using functions to
+make it better. Let's start by making a function that will let the
+user select an item from a list. This function would be useful when we
+want to ask the user to select an item to edit, or delete.
+
+There is one think that we must keep in mind. In the previous
+`list_maker.py` from [Part 5](../005-lists/), the numbered list of
+items we printed on the screen started with `0`, just like the list
+starts with `items[0]`. That makes it a bit easier on the programmer -
+the number we print, is the same as the one the list uses internally.
+But for the *user*, this becomes a bit counter-intuitive; we expect
+numbered lists to start with 1 rather than 0. Because of this, we will
+make things work the way a human would expect this time. The first
+item in the list will still be `item[0]` (we have no other choice -
+that's how Python works), but when we *show it on the screen*, it will
+be called `1`. And subsequently, `item[1]`, the second item, will be
+called `2` on the screen, and so on. We must keep this in mind - we
+must always subtract 1 from the number we show on the screen, to get
+the proper list index (read: the number between `[` and `]` in
+`item[0]`).
+
+```python
+def select_item(items):
+    # num_items == how many items are in the list
+    num_items = len(items)
+
+    # Now we want to give the user several tries
+    # to make a valid choice. Therefore, we need
+    # a loop.
+    while True:
+        item_num = input("Select an item: ")
+        item_num = int(item_num)
+
+        # We check if the user's number is valid.
+        if item_num < 1 or item_num > num_items:
+            # The user's number is not valid.
+            print(f"Valid numbers are 1 to {num_items}")
+        else:
+            # The user's number is valid, so let's return it.
+            return item_num - 1
+```
+
+Exercise
+--------
+
+Previous: [Part 5: Lists and for loops](../005-lists/) |
+Next: *Coming soon* &trade; |
+[Index](../)

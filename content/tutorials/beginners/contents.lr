@@ -30,3 +30,7 @@ part has two sections:
 - [Part 5: Lists and for loops](005-lists/) explains how to store data
   in a list instead of just in single variables, and how to use `for`
   loops to go through such lists.
+
+- [Part 6: Creating functions](006-functions/) shows you how to create
+  your own functions, so you can organize and reuse your code in a
+  better way.
