@@ -5,9 +5,15 @@ body:
 The short version - for experienced programmers
 -----------------------------------------------
 
+Functions are defined using the `def` keyword in Python.
 
 ```python
-pass
+def my_function(arg1, arg2):
+    print(f"{arg1} + {arg2} = {arg1 + arg2}")
+
+    # If you don't explicitly return anything, the special
+    # value None will be returned implicitly.
+    return arg1 + arg2
 ```
 
 The full version - for beginner programmers
@@ -121,8 +127,9 @@ And we will get the following:
 50
 ```
 
-If we don't want to keep the area - if we only want to print it, and
-that's it - then we can shorten it like this:
+If we don't want to keep the area by storing it in the `area`
+variable - if we only want to print it, and that's it - then we can
+shorten it like this:
 
 ```python
 print(calculate_area(10, 5))
@@ -149,11 +156,11 @@ numbered lists to start with 1 rather than 0. Because of this, we will
 make things work the way a human would expect this time. The first
 item in the list will still be `item[0]` (we have no other choice -
 that's how Python works), but when we *show it on the screen*, it will
-be called `1`. And subsequently, `item[1]`, the second item, will be
-called `2` on the screen, and so on. We must keep this in mind - we
-must always subtract 1 from the number we show on the screen, to get
-the proper list index (read: the number between `[` and `]` in
-`item[0]`).
+be called number `1`. And subsequently, `item[1]`, the second item,
+will be called number `2` on the screen, and so on. We must keep this
+in mind - we must always subtract 1 from the number we show on the
+screen, to get the proper list index (read: the number between `[` and
+`]` in `item[0]`).
 
 Open IDLE, select `File` and then `New file`. Then type the follwing
 into our new file:
@@ -199,7 +206,7 @@ the following:
 - While the player doesn't choose to quit:
   - Print the list
   - Ask the user what they want to do
-  - If they want to add an item, ask for it
+  - If they want to add an item, ask for what to add, and add it
 
 The loop exits automatically when the player chooses to quit, since
 the condition to continue the while loop is that they haven't chosen
@@ -277,10 +284,6 @@ main_loop()
 ```
 
 Run it (`F5`), and make sure that it works.
-
-Now, we also need a function to *select* an item from a
-list. This will be needed to allow the user to select an item to be
-deleted or edited, for example. Add this function to the same file:
 
 **A slightly more complex function - `select_item`**
 
@@ -388,6 +391,20 @@ there are no items to delete, so no use in trying).
 
 Exercise
 --------
+
+Your exercise this time is to add another thing the user can do to our
+`list_maker2.py` program: editing items.
+
+1. There should be a new option, `e` for edit.
+2. When the user chooses this option, they should be asked to select
+   which item to edit.
+3. They should then be asked for a new item, to replace the one they
+   selected.
+4. The selected item should be changed accordingly.
+
+Try to use existing function(s) when you can, to avoid duplicating
+work. As always, you will find a suggested solution in the next part
+of this tutorial.
 
 Previous: [Part 5: Lists and for loops](../005-lists/) |
 Next: *Coming soon* &trade; |
