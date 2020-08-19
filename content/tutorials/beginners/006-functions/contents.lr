@@ -107,8 +107,8 @@ This creates a function called `calculate_area`. Unlike our previous
 `say_hello` function, this one takes two arguments - `height` and
 `width`. Using these, it calculates an area by simply multiplying them
 as one does. Then, we *return* the result. That means that the value
-from the `area` variable is *sent back* to where ever it was called.
-This means that we can now do this:
+from the `area` variable is *sent back* to where ever it was called
+from. This means that we can now do this:
 
 ```python
 area = calculate_area(10, 5)
@@ -136,9 +136,8 @@ are sent directly - as an argument - to the `print` function.
 The functions we've made so far aren't really that useful - so let's
 make one that is. We will now rewrite and extend the `list_maker.py`
 program that we made in [Part 5](../005-lists/) using functions to
-make it better. Let's start by making a function that will let the
-user select an item from a list. This function would be useful when we
-want to ask the user to select an item to edit, or delete.
+make it better. Let's start by making a function that will let us
+print the list, with a number next to each item.
 
 There is one think that we must keep in mind. In the previous
 `list_maker.py` from [Part 5](../005-lists/), the numbered list of
@@ -156,8 +155,174 @@ must always subtract 1 from the number we show on the screen, to get
 the proper list index (read: the number between `[` and `]` in
 `item[0]`).
 
+Open IDLE, select `File` and then `New file`. Then type the follwing
+into our new file:
+
 ```python
-def select_item(items):
+def display_items(items):
+    if len(items) == 0:
+        print("The list is empty.")
+        return
+
+    item_num = 1
+    for item in items:
+        print(f"{item_num}. {item}")
+        item_num += 1
+```
+
+Save it (`Control-s`) giving it the name `list_maker2.py` - but there
+is no point in running it yet. If you try, nothing will happen. That's
+because we have "defined" (read: written) the function, but we haven't
+"called" (read: used) it yet. That comes later - we need more
+functions first.
+
+This function starts by checking if there are in fact any items in the
+list - if there aren't, then there's no point in trying to print it.
+Instead, it will print `The list is empty` in such cases and then
+return. Again, the `return` statement exits the function, going back
+to where we were when we called it.
+
+Now we can use this function every time we want to print a list. And
+if we want to change how lists are printed, we only have to change it
+once - in this function. If we instead had copied and pasted the code
+each time we wanted to print a list, we would have to change each copy
+every time we wanted to change how lists are printed. This is an
+important concept in programming: *always try to avoid duplicating
+code*. Having duplicates makes it harder to maintain your programs,
+because there is more to maintain.
+
+Okay. So now we can print our list, using the `display_items` function
+we just wrote. We just need another function now, which serves as the
+"main loop" of our program. This function will have a loop that does
+the following:
+
+- While the player doesn't choose to quit:
+  - Print the list
+  - Ask the user what they want to do
+  - If they want to add an item, ask for it
+
+The loop exits automatically when the player chooses to quit, since
+the condition to continue the while loop is that they haven't chosen
+to quit. Add this function to the file:
+
+```python
+def main_loop():
+    # This, [], is an empty list. We start with that.
+    items = []
+
+    user_input = ""
+
+    while user_input != "q":
+        display_items(items)
+
+        user_input = input("Add item or quit (a/q)? ")
+
+        if user_input == "a":
+            new_item = input("What should I add? ")
+            items.append(new_item)
+```
+
+We now have both the functions that we need (for now) - one that
+displays the list, and one which loops around until the user chooses
+to quit.
+
+There's still one final thing that our program needs before it will
+work. And that is - we need to call (read: tell our program to start)
+the `main_loop` function. So, at the end of our file, add two blank
+lines (that's customary between functions and other lines in Python),
+and then just this line:
+
+```python
+main_loop()
+```
+
+This line calls the `main_loop` function (which in turn calls our
+`display_items` function). It is important that this line is *below*
+the function itself, because otherwise Python will be like "What is
+this main_loop function of which you speak?" Python needs to have seen
+that function *before* we can call it.
+
+That's all we need to run our new function-based `list_maker2.py`
+program. For clarity, here it is again in its entirety:
+
+```python
+def display_items(items):
+    if len(items) == 0:
+        print("The list is empty.")
+        return
+
+    item_num = 1
+    for item in items:
+        print(f"{item_num}. {item}")
+        item_num += 1
+
+
+def main_loop():
+    # This, [], is an empty list. We start with that.
+    items = []
+
+    user_input = ""
+
+    while user_input != "q":
+        display_items(items)
+
+        user_input = input("Add item or quit (a/q)? ")
+
+        if user_input == "a":
+            new_item = input("What should I add? ")
+            items.append(new_item)
+
+
+main_loop()
+```
+
+Run it (`F5`), and make sure that it works.
+
+Now, we also need a function to *select* an item from a
+list. This will be needed to allow the user to select an item to be
+deleted or edited, for example. Add this function to the same file:
+
+**A slightly more complex function - `select_item`**
+
+It's time to add some more functionality to our program. We also want
+to be able to delete items from our list. When the user presses `d`
+for `delete`, we want to ask them which item they want to delete. This
+"selecting an item from the list" business sounds like something that
+would be great to put into a function. Because in the future, we might
+want to add more functionality to our program, which also requires
+that the user select an item from the list. Therefore, it's a good
+idea to put the "select an item from the list" code in a function
+which we can easily reuse.
+
+So, we have decided that we need a `select_item` function. This
+function will be a little more complex than our other functions, so we
+should probably give it some thought before we start writing it.
+
+It's a good idea to decide on what *requirements* we have on
+functions. In this case, the following is a reasonable list of
+requirements:
+
+- The function should only let us choose items that actually exist. If
+  there are three items in our list, then `1`, `2`, and `3` should be
+  the only valid answers. If the user enters something else, then keep
+  asking until they give us a valid answer.
+- When the function asks us to select an item, it should say something
+  along the lines of "Please select an item". This is called the
+  "prompt". And it is a good idea to let this prompt be customizable,
+  so that we can set it to "Please select item to delete" if we're
+  calling the function to decide which item to delete, or something
+  else that's appropriate at the time.
+
+These requirements means that our function will need to have access to
+the list (in order to know how many items it has, and thus which
+inputs are valid), and also the prompt we wish to use. Therefore, we
+simply send the list and a prompt to the function as *arguments* when
+we call it. Using this information, we can write the following
+function (type it in just before the `main_loop()` call at the end of
+the `list_maker2.py` file, separated by two blank lines):
+
+```python
+def select_item(items, prompt):
     # num_items == how many items are in the list
     num_items = len(items)
 
@@ -165,7 +330,7 @@ def select_item(items):
     # to make a valid choice. Therefore, we need
     # a loop.
     while True:
-        item_num = input("Select an item: ")
+        item_num = input(prompt)
         item_num = int(item_num)
 
         # We check if the user's number is valid.
@@ -176,6 +341,50 @@ def select_item(items):
             # The user's number is valid, so let's return it.
             return item_num - 1
 ```
+
+In our `main_loop` function, we need to change the line that used to
+say `"Add item, or quit (a/q)? "` to also mention our new "remove"
+option, and then we need to add a few lines at the end which will
+remove the item the user has selected. After we've made our changes,
+the function should look like this:
+
+```python
+def main_loop():
+    # This, [], is an empty list. We start with that.
+    items = []
+
+    user_input = ""
+
+    while user_input != "q":
+        display_items(items)
+
+        # This line is changed - "remove" has been added
+        user_input = input("Add, remove or quit (a/r/q)? ")
+
+        if user_input == "a":
+            new_item = input("What should I add? ")
+            items.append(new_item)
+
+        # The lines below this one are new:
+        if user_input == "r":
+            if len(items) == 0:
+                print("There is nothing to remove.")
+                continue
+
+            index = select_item(items, "Remove which item? ")
+            del items[index]
+```
+
+In the new lines at the end of the function, we check if the user has
+entered `r` for "remove". If so, we check if the list is empty (we
+check if the length of the list is zero). In that case, there is
+nothing to delete, so we say as much. Then, we "`continue`", which is
+something new we haven't seen before. What `continue` means is that
+when Python reaches this line, it will continue with the next
+run-through of the `while` loop. In other words, `continue` makes sure
+that the lines below it are skipped if the list is empty (because then
+there are no items to delete, so no use in trying).
+
 
 Exercise
 --------
