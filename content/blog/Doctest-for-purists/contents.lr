@@ -86,7 +86,7 @@ $ chmod +x .git/hooks/pre-commit
 
 ... and that, as they say, is it. We're done. If we now introduce a
 bug in our `stupid_math.py` file, making the `add_two_numbers`
-function return `a + b + 1` instead of `a + b`, then commit will yell
+function return `a + b + 1` instead of `a + b`, then `git` will yell
 at us when we try to commit our change (file paths abbreviated to
 keeps things more legible):
 
@@ -94,7 +94,7 @@ keeps things more legible):
 $ git add stupid_math.py
 $ git commit
 **********************************************************************
-File "/[...]/stupid_math.py", line 5, in stupid_ath.add_two_numbers
+File "/[...]/stupid_math.py", line 5, in stupid_math.add_two_numbers
 Failed example:
     add_two_numbers(1, 2)
 Expected:
@@ -102,8 +102,7 @@ Expected:
 Got:
     4
 **********************************************************************
-File "/[...]/stupid_math.py", line 7, in stupid_
-ath.add_two_numbers
+File "/[...]/stupid_math.py", line 7, in stupid_math.add_two_numbers
 Failed example:
     add_two_numbers(2, 3)
 Expected:
@@ -111,8 +110,7 @@ Expected:
 Got:
     6
 **********************************************************************
-File "/[...]/stupid_math.py", line 9, in stupid_
-ath.add_two_numbers
+File "/[...]/stupid_math.py", line 9, in stupid_math.add_two_numbers
 Failed example:
     add_two_numbers(3, 5)
 Expected:
