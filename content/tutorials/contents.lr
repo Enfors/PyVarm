@@ -20,3 +20,10 @@ For experienced Python developers
 - [Doctest considered awesome](/blog/Doctest-considered-awesome/) is
   an article which explains how to use Python's built-in `doctest`
   module to write documentation which also works as automated tests.
+
+- [Doctest for purists](/blog/Doctest-for-purists/) is a continuation
+  of the [Doctest considereed
+  awesome](/blog/Doctest-considered-awesome) article, which takes
+  things to the next step; here, we explore how you can use a simple
+  git hook which makes sure all your `doctest` tests pass before
+  you're allowed to commit your code on a Linux system.
