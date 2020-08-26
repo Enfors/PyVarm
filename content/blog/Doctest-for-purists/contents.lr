@@ -1,0 +1,206 @@
+title: Doctest for purists
+---
+pub_date: 2020-08-26
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+In the [first article in this series](../Doctest-considered-awesome/),
+we looked at how simple it is to add automated tests with the
+`doctest` module to your Python code. In this article, we'll expand on
+that by adding a simple `git` configuration which makes it impossible
+to commit your Python files if their tests fail. This article assumes
+you are using Linux, but can be adapted for other operating systems.
+
+---
+body:
+
+What is a git pre-commit hook and how can it help me?
+-----------------------------------------------------
+
+A git pre-commit hook is an executable file that `git` will run,
+when ever you try to do a `git commit` command. If this executable
+does not return 0 when it is called, then `git` will reject the
+commit. We can use this to our advantage, by creating an executable
+file that only returns 0 if our code passes the `doctest` tests.
+
+I've said that the pre-commit hook is an executable file, and that
+means that it's anything that you can execute from the command line.
+In other words, it could be a shell script, a runnable Python script,
+a C program, or similar. The file must be placed inside your git
+repository (where you ran the `git init` command), specifically, the
+executable should be `.git/hooks/pre-commit`. In the `.git/hooks/`
+directory, there is typically a `pre-commit.sample` file by default
+that you can look at if you want (but it won't be used by `git`, since
+it's called `pre-commit.sample` and not `pre-commit`).
+
+Let's make our pre-commit hook
+------------------------------
+
+Let's say we have a file, `stupid_math.py`, similar to what we created
+in the previous article, [Doctest considered
+awesome](../Doctest-considered-awesome/):
+
+```python
+def add_two_numbers(a, b):
+    """
+    This function adds its two arguments together, and returns the
+    result.
+    >>> add_two_numbers(1, 2)
+    3
+    >>> add_two_numbers(2, 3)
+    5
+    >>> add_two_numbers(3, 5)
+    8
+    >>>
+    """
+    return a + b
+```
+
+We can test this code in the same way as we did in the previous
+article:
+
+```
+$ python3 -m doctest stupid_math.py
+$
+```
+
+Since there are no errors in our code, this will not produce any error
+messages and the tests will pass, which also means that - and this is
+critical - *the command will return 0*. If there had been errors, we
+would have seen them and the command would have returned something
+other than 0. Does that ring a bell? It should, because it's precisely
+what we need for our pre-commit hook. Therefore, writing our
+pre-commit hook is very simple - all it needs is that one line. We can
+create it directly from the command line, we don't even need to use a
+text editor. Just remember to also make it executable, or `git` will
+disregard it:
+
+```
+$ echo "python3 -m doctest stupid_math.py" >.git/hooks/pre-commit
+$ chmod +x .git/hooks/pre-commit
+```
+
+... and that, as they say, is it. We're done. If we now introduce a
+bug in our `stupid_math.py` file, making the `add_two_numbers`
+function return `a + b + 1` instead of `a + b`, then commit will yell
+at us when we try to commit our change (file paths abbreviated to
+keeps things more legible):
+
+```
+$ git add stupid_math.py
+$ git commit
+**********************************************************************
+File "/[...]/stupid_math.py", line 5, in stupid_ath.add_two_numbers
+Failed example:
+    add_two_numbers(1, 2)
+Expected:
+    3
+Got:
+    4
+**********************************************************************
+File "/[...]/stupid_math.py", line 7, in stupid_
+ath.add_two_numbers
+Failed example:
+    add_two_numbers(2, 3)
+Expected:
+    5
+Got:
+    6
+**********************************************************************
+File "/[...]/stupid_math.py", line 9, in stupid_
+ath.add_two_numbers
+Failed example:
+    add_two_numbers(3, 5)
+Expected:
+    8
+Got:
+    9
+**********************************************************************
+1 items had failures:
+   3 of   3 in stupid_math.add_two_numbers
+***Test Failed*** 3 failures.
+```
+
+See? It starts complaining even before asking for a commit message -
+no point in bothering, since it's not going to let us commit our
+faulty code anyway.
+
+But as soon as we fix our bug, we will be able to commit again without
+any problems:
+
+```
+$ git commit -m "Remove an insidious bug"
+$
+```
+
+Now `git` accepts our code! And there was much rejoicing.
+
+But what if I have more than one Python file?
+---------------------------------------------
+
+Now, as you might have noticed, our `.git/hooks/pre-commit` script is
+very simple, and only checks that one specified file -
+`stupid_math.py`. We can upgrade it a little, so that it automatically
+checks *all* Python files that it finds, by changing it to something
+like:
+
+```
+python3 -m doctest $(find . -type f -name "*.py")
+```
+
+In case you're not familiar with the `$(...)` syntax, it's a small
+piece of shell script magic which takes the command inside, runs it,
+takes its output (replacing all newlines with spaces), and inserts it
+into the original command line.
+
+The `find` command will look recursively:
+
+- starting in the current directory (the `.` argument)
+- for ordinary files (`-type f`)
+- that have a name ending in ".py" (`-name "*.py"`)
+
+Meaning, if we had two files,
+`stupid_math.py` and `dumb_math.py`, the line:
+
+```
+python3 -m doctest $(find . -type f -name "*.py")
+```
+
+... will be replaced with:
+
+```
+python3 -m doctest ./dumb_math.py ./stupid_math.py
+```
+
+... which is precisely what we want - the script has found all files
+ending in "`.py`" (even if they're in subdirectories), and will now
+run any doctests it finds in all of them. If there are no doctests in
+a file, that's not a problem - `doctest` will think if that file as
+having "passed" the test.
+
+Conclusion
+----------
+
+We have now explored how easy it is to add `doctest` tests to code
+(bearing in mind that not all types of code are suitable to such
+tests), and how easy it is to make sure `git` doesn't let you commit
+code that fails the tests. *This is going to end up being really
+f---ing annoying*. My response to that is, deal with it. Make sure
+your code always works. Sometimes code changes in such a way that the
+tests fail, even though the code really works. *In that case, update
+your tests*. Trust me, your future self (and any poor bastard who has
+to maintain your code in the future) will thank you.
+
+Test-driven development is all about writing the tests first before
+you even start programming, and then you keep writing code until all
+tests pass - and then you're done. When you have to change or add to
+your code, you start by changing or adding to your tests, then you
+write code until all tests pass again. This approach is not suitable
+for all situations, but it's worth thinking about.
+
+How are you going to be using `doctest` to improve your code? Feel
+free to comment below!
