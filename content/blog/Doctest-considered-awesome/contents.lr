@@ -232,8 +232,8 @@ can test manually in the interpreter, you can test automatically with
 `doctest`. And these tests are so easy to add, and they serve as
 documentation too, so why *not* add them?
 
-In a future blog post, I will show you how you can use `doctest` to
-make a simple "mini continuous integration" system for projects
-where you use `git` for version control, by adding a git hook that
-automatically tests the code you commit and refuses to accept it if
-the tests do not pass.
+In [another blog post](/blog/Doctest-for-purists/), I show you how
+you can use `doctest` to as a component of a simple "mini continuous
+integration" system for projects where you use `git` for version
+control, by adding a git hook that automatically tests the code you
+commit and refuses to accept it if the tests do not pass.
