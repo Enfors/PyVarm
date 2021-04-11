@@ -1,0 +1,99 @@
+title: Making an online fantasy game for the visually impaired
+---
+pub_date: 2021-04-11
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+Lately, I've been toying with the idea of making an online fantasy game (written in Python, obviously) which anyone with an internet connection can play, but which also specifically caters to the blind or otherwise visually impaired who uses a screen reader to have their computer read text out loud to them. Given how many projects I'm already involved with, this is unlikely to ever happen. Nevertheless, it's an interesting thought to experiment with. Follow along, as I explore the idea of how this would work.
+
+---
+body:
+
+Modern online fantasy games - MMORPGs
+=====================================
+
+"MMORPG" is a acronym for "Massively Multiplayer Online Role-Playing Game". The graphical MMORPGs came into being with games like Meridian 59, Ultima Online and EverQuest, and were brought into public awareness with the run-away success of World of Warcraft. These are games that allow players to play in the same world as hundreds or thousands of other players at the same time, and can be an absolutely fantastic experience.
+
+For the visually impaired, though, these games are largely inaccessible due to their visual nature. There is unfortunately little that can be done about that, as far as I know. However, there is hope - but to examine this further, we need to take a brief look at the history of these games.
+
+In the beginning, there was text
+================================
+
+Before these graphical games came to be, there were similar games which were entirely text-based; these games were often called MUDs, which is an acronym for Multi-User Dungeons. These games were very popular in the 90's, and many of them still exist in relative obscurity to this day. These games are to the graphical MMORPGs as books are to movies - where movies visually show the narrative to the viewers, books tell the narrative to the readers in plain text. A MUD will typically have lots and lots of locations players can visit, each with a its own description. As a player enters a location - called a "room" for simplicity even if it's outdoors - the description is displayed. After that, there is typically a list of other things in the room, where "things" can be anything from objects on the ground to other players and monsters that players can fight Dungeons and Dragons-style, to gain experience and treasure.
+
+The reason why this is relevant is because, as I understand it, the visually impaired sometimes use screen readers on their computers, to read text out loud to them. This means that it is technically possible for them to play on MUDs, since they can hear all the text that the MUD displays. However, as any visually impaired user who has tried to do this will tell you, there are a few problems related to this which makes the experience less than optimal.
+
+Problem 1: Text formatting
+==========================
+
+MUDs will often display text inside "boxes" made of ASCII characters, for example:
+
+```
++----------+----+
+| Strength | 14 |
++----------+----+
+```
+
+That's fine for those of us who can see, but users of screen readers will probably hear something along the lines of "`plus dash dash dash dash dash dash dash dash dash plus dash dash dash dash plus pipe Strength pipe 14 pipe plus dash dash...`" and so on. Then imagine the game also lists Intelligence, Wisdom, Dexterity, Perception, and Constitution at the same time, in the same way. By the end of listening to all that, blind users would probably wish they were deaf as well. So this is obviously something that a MUD created with screen readers in mind would have to take into consideration.
+
+
+Problem 2: Things happen very fast on MUDs
+==========================================
+
+A MUD will often display a lot of text, very quickly. The sighted among us will soon learn to swiftly scan across this text, and find what's relevant - therefore, the amount of text is typically not a problem for us. However, if you're instead *listening* to all that text being read aloud by a screen reader, you can't just skip ahead to the relevant bits.
+
+And to make things worse, combat on MUDs often happen in "rounds" that are two seconds long. This means that every two seconds, your character and their opponent will attack each other. It is not uncommon for both player characters and computer-controlled opponents to have multiple attacks per round, meaning that every two seconds the MUD will display text similar to this:
+
+```
+You hit the minotaur hard.
+You miss the minotaur.
+You strike the minotaur a devastating blow.
+The minotaur hits you very hard.
+The minotaur strikes you a glancing blow.
+The minotaur misses you.
+```
+
+That's a lot of text - and keep in mind, a text block like this will be displayed *every two seconds*. That's hard for the screen reader - and the listener - to keep up with. Clearly, a MUD which caters to users of screen readers need to somehow reduce the amount of text in a given timeframe to a manageable amount.
+
+Solution 1: Slowing things down
+===============================
+
+In order to slow things down to manageable speeds for a screen reader, I would make a turn-based combat system on such a game. Rather than having combat rounds happen automatically every two seconds, I'd make a system where all combatants have 30 seconds to decide what they want to do in the next round of combat, such as "swing sword", "thrust sword", "cast fireball", "flee", and so on. When all combatants in the same battle have entered their commands, or when the 30 seconds are up, *then* the results will be displayed in a brief, concise manner to all involved.
+
+Solution 2: Screen reader mode
+==============================
+
+A game such as this should have a way of enabling "screen reader mode". This would remove all unnecessary ASCII boxes around things, and in general make the MUD produce output in a format specifically designed for screen reader. For example, instead of getting your statistics (strength, etc) inside boxes, the MUD would display something like:
+
+```
+Strength 14, Intelligence 12, Wisdom 17, Dexterity 10, Perception 13, Constitution 9.
+```
+
+Other things to consider
+========================
+
+There are many other issues to consider when making a MUD which will play nice with screen readers. Let's explore a few of them.
+
+Requesting specific information
+-------------------------------
+
+On MUDs, there are often commands that will display a list of all "skills" that your character has. Such a list can often include 30, 40, even 50 or more skills - all included in one big list in response to the player typing "`skills`" or similar. Again, this isn't a problem for sighted users whose gaze will quickly scan the list to find the relevant skill. However, for users of screen readers, there needs to be ways of reducing the amount of information shown to the specific info we want at the time. For example, perhaps instead of just typing "`skills`", typing "`skills combat`" or "`skills crafting`" will list relevant skills only, reducing the list from 40 to perhaps 10 or 15 skills.
+
+Being able to mute things
+-------------------------
+
+On a busy MUD, there are often a myriad of sources of spam which will display all sorts of messages to the user. Other players walking by or chatting on the global chat system, birds chirping, monsters growling, and so on. These messages are typically color-coded, which makes it easy for the sighted to mentally filter out what they're not interested in at the moment. Screen reader users, however, will hear every single one of these messages being read out loud. Therefore, it is important that they are able to mute specific types of messages that they're not interested in at the time.
+
+Non-reliance on maps
+--------------------
+
+MUD players will often make their own maps of MUD areas by hand on graph paper, or automatically using MUD-mapping software. This avenue is probably closed to many of the visually impaired, so it's important that the MUD doesn't rely on all players having access to maps, or being able to make their own. This means that all players should probably have access to a sort of "MUD GPS", which can automatically help players navigate the MUD world.
+
+Conclusion
+==========
+
+Making an inclusive, text-based game that allows both the sighted and users of screen readers to play together is most definitely possible. There are examples of MUDs that have made changes to the game to make it more accessible to the visually impaired, but I'm not sure if one has ever made that was specifically designed with them in mind as part of the core target audience. I'm not saying that I intend to make such a game, but I am saying that the thought is certainly very interesting.
