@@ -1,0 +1,89 @@
+title: Blind Rage MUD development diary, entry 1
+---
+pub_date: 2021-04-12
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+As I sort of implied in yesterday's blog post, [Making an online fantasy game for the visually impaired](/blog/MUD-for-the-blind/), making a MUD - a text-based MMORPG - has been my white whale since 1995. Therefore, I have now (again), against better judgement, decided that I will pursue this whale. In this post, I will explore how and why I want to do this.
+
+---
+body:
+
+First, I'm going to go into some background. Not because anybody cares, but because I want to tell the story.
+
+Background
+==========
+
+I've always liked computer games. For me, it all started with Game & Watch games back in the mid 80's. Then, my older brother got a Commodore Vic-20. Then I got a Commodore 64, a computer I liked so much I wrote a [love letter](https://hackernoon.com/a-love-letter-to-the-commodore-64-bbef869e480) to it. I especially loved the cooperative games on the Commodore 64 - games where you and a friend could play together, games like Bubble Bobble and Wizball. I later moved on to Commodore Amiga computers, and one of my friends eventually bought a modem. This was around 1993, before Internet was a household commodity, so modems back then were used to dial into BBSes.
+
+I will never forget the first time I visited this friend - his name was Magnus Ericsson - after he had bought his modem. He was connected to a BBS, and suddenly the sysop (the owner / administrator of the BBS) initiated a chat with him. In those days, what your chat partner was typing was instantly shown, character by character on your screen even before they had pressed enter. I will never forget that magical feeling of seeing characters appear one by one on the screen. It was immediately obvious that these characters were being displayed in real time as they were being remotely typed by a human - that is, it was my first human-to-human contact across a computer network.
+
+It was not long before I bought my own modem. The BBS I most often connected to was called Olympia BBS, and I soon became friends with its sysop, Henrik Lindhe. Olympia BBS was run on an Amiga 3000, and eventually Henrik (or possibly his brother, Magnus Lindhe) installed what was known as a "door" - an external program that you could interact with when you were connected to the BBS. The door in question was an Amiga version of CircleMUD (which is closely related to DikuMUD). This was my first MUD experience. I could connect to this game, walk around in its world, fight monsters and gain levels. I was hooked. You couldn't really play with other BBS users, since the BBS only had one phone line and therefore only one external user could be connected at the time. However, Magnus Lindhe, sitting in the same room as the Amiga 3000 on which the BBS ran, could play by connecting another computer directly to it using a null modem cable. That means I could play with him. I still remember using the "track" ability to find him in the world, and then walking around together killing monsters until we got the crap kicked out of us by a vulture.
+
+To me, the world we played in was very interesting. If I remember correctly (this is around 27 years ago, after all), there was a mailman NPC (non-player character) that walked around town picking up mail from mailboxes. And there was a quest, involving a tree and a squirrel. This was all fascinating to me.
+
+Then, I became aware of the Internet. A Swedish computer magazine had an ad for an ISP called Kwai Connection in a different part of Sweden (Hofors). I don't remember how much it would cost to become a customer, but the problem was that since Hofors was so far away from me, calling there with my modem would have been expensive long distance calls. However, they did offer five hours for free - meaning, that for those five hours, I would only have to pay the long distance phone bill. So I thought okay, I can pay for that. So I signed up, and got my five hours.
+
+Kwai Connection had a text-based menu when you connected. And on that menu, I found a list of MUDs you could connect to. The first of these was called "3 Kingdoms", and it is a MUD that still exists today. So I connected, logged in, and what I experienced then is why I'm writing this now, all these years later.
+
+I came into a world that was *filled* with other players. The "`who`" command revealed that there was around *100 players online*. To me, who was used to playing games with at most one other player, that was amazing. All these people walking around in the same world, joining guilds, fighting monsters, advancing in levels, and having fun together. I knew that being limited to five hours, there was no point in me even trying to participate. Instead, I walked around in the starting town (Pinnacle) as a tourist, looking and marveling at the sights of all these players running around and interacting with each other. I logged everything in a text file, which I often read through longing for the world I could no longer access (as silly as it may sound now).
+
+Around a year later, I went to college and was given proper access to the Internet. I still remembered my first MUD love, and the 3 Kingdoms MUD became a source of a lot of joy and friendships over the coming three years. After that, a friend I met there called Ulf Hedlund (Ulme in the game) decided to start his own MUD called Ages of Despair. Because of my interest and coding experience, I was given a role as a wizard (read: developer) on that MUD. After a few very active years where I coded a lot there, I've had a very on-off (mostly off, to be honest) relationship with Ages of Despair. I still log on from time to time.
+
+But, and now we're *finally* coming close to the point of this blog post, I've always dreamt of making my own MUD. I've tried a number of times before, each time losing interest long before I managed to get anywhere worthwhile. But now, I hope (probably in vain), things will be different.
+
+The motive
+==========
+
+In recent years, I've thought about how MUDs should have screen reader modes, which makes it easier for the visually impaired who use software to read the MUD text out loud, to understand what's happening in the game. It is my understanding that some MUDs have this, and that's good. But heaven knows it would be hard to implement on a game like Ages of Despair, which for obvious reasons is the one I'm most familiar with. And I think it would be a lot of fun, while I improve my coding skills at the same time.
+
+The means
+=========
+
+Enter [Evennia](https://www.evennia.com). Evennia is a MUD-making system written in Python. You can use it as a base on which to build a MUD or similar system. One of the great things about Evennia is that it is a very *broad* base - it has a lot of support for things like connection in-game chat channels to IRC, and it comes with its own web-based interface for players as well as support for playing with a traditional MUD client. But it is "only" a base - it doesn't come with a skill system, a combat system or anything like that. Those you are supposed to provide yourself. And that sounds perfect to me. I have specific ideas about how all such things should work, so it's easier for me if I don't have to start by ripping out existing systems to make room for my own.
+
+Introducing Blind Rage MUD
+==========================
+
+For now, I've decided to go with the name Blind Rage MUD for this project. Not because "blind rage" is a notion that appeals to me, but because it's a name that's easier to associate with part of its intended target audience. "What was the name of that MUD designed for blind people again? Oh right, Blind Rage MUD!"
+
+The idea behind this project is to create a game where the sighted and the visually impaired can participate on the same terms. My fondest memory of MUDs and MMORPGs all revolve around the communities and friendships created in them, so it's a priority for me to make that possible with this project.
+
+Setting
+-------
+
+This will be a general fantasy game, not based on any established settings. Since I've been a Dungeons & Dragons DM lately, some inspiration from that direction to seep in.
+
+Classes and levels
+------------------
+
+While I used to prefer a classless and level-less system, I no longer think that's the best option. If all skills are available to all characters, I think there's a great risk that most players will have more or less the same set of useful skills. If you on the other hand limit the number of skills a player can have to those provided by their class (or classes, in the case of multi-class characters), then players will be more reliant on cooperation with one another, which is something I want to encourage. Therefore, I intend to go with a class-based system; but I won't call them classes, I will call them guilds because to me, that word closer matches what they're intended to be. It makes more sense to say "I joined the guild of thieves" than "I joined the class of thieves".
+
+There will be two types of levels: 
+- Character level (which goes up to 60), and
+- Guild level (which goes up to 40).
+
+You advance in character levels by gaining experience points (which you mostly do by killing monsters). When you gain a character level, you can advance one level in a guild of which you are a member. You can at most be a member of three guilds at once. This means that when you reach max character level (60), you can be guild level 40 in one guild and guild level 20 in another. Or, you could be guild level 20 in three different guilds, or any other combination keeping in mind that you can at most be a member of three guilds at a time, and that guild levels only go up to 40.
+
+What happens at max level?
+--------------------------
+
+Once a player reaches character level 60 and then gains enough experience points to reach a hypothetical 61, they are instead allowed (but not required ) to replace one of their guild levels with a guild level in a different guild. This means that over time, you can "migrate" your character over from one guild to another. The idea is that your character won't stagnate at max level - instead of continuing advancement upwards towards higher levels, it will advance "sideways", becoming different without really becoming more powerful to keep players' interest without making them overly powerful compared to other players.
+
+How about skills?
+-----------------
+
+Some skills will be available to all players, while others are limited to one, or a few, guilds. As you advance in guild levels, more and more of its skills will become available to you, with the most powerful skills only being available at high guild levels.
+
+Development model
+=================
+
+In order to get anywhere with this project before my limited attention span runs out, I intend to employ the spiral model. This means that I will develop the MUD in "circles" of increasing size. In the first "circle", which will take less than a week, I will put placeholders in for all major systems. A combat system? Right, flip a coin, the loser dies. There, now we have a combat system, on to the next system. A skill system? Right, when ever the game asks what a character's skill value is in a specific skill, just return "10". There, that's the skill system. A world? Okay, here's four rooms, now we have a world.
+
+This way, I can have a "complete" although not very deep game up within a few days (before my attention span runs out). Then, I make another "circle", this time "bigger", which means I improve each system slightly. Then I continue with increasing circle sizes until you have a I game (or I become bored - which ever comes first).
+
+Who knows? Maybe this time it really will be different. Maybe this time, I'll actually end up with a playable MUD? Only time will tell.
