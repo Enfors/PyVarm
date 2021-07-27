@@ -3,7 +3,7 @@ title: Tutorials
 body:
 
 On this page, we intend to eventually publish various Python-related
-tutorials. 
+tutorials.
 
 If you're totally new to Python
 -------------------------------
@@ -27,3 +27,5 @@ For experienced Python developers
   things to the next step; here, we explore how you can use a simple
   git hook which makes sure all your `doctest` tests pass before
   you're allowed to commit your code on a Linux system.
+
+- [Making a Minecraft screenshot viewer in Python](/blog/ImageMon/) shows you how to make a short script that uses `TkInter` and `pillow` to always display the last screenshot you took in Minecraft on a secondary screen. This is useful when you're building repeating patterns, and want to look at the screenshot as a reference while you're building.

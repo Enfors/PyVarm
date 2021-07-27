@@ -1,0 +1,203 @@
+title: Making a Minecraft screenshot viewer in Python
+---
+pub_date: 2021-07-26
+---
+author: Christer Enfors
+---
+pythondevshandle: Enfors
+---
+blurb:
+
+I’m a software developer, and I’m also a gamer. Most of us who grew up with Lego love playing Minecraft, because you never run out of bricks to build within Minecraft. It’s an amazing game. But it can also be frustrating at times. This article explains how I solved one of those frustrations using Python.
+
+---
+body:
+
+The problem
+===========
+
+When it comes to hobby projects in software development, the notion of “scratching that personal itch` often comes up — and this article is about precisely that. You see, when I play Minecraft, I often find myself building repeating patterns or decorations of various kinds. For example, if I’m building a house, each section of wall probably looks the same — a repeating pattern. To design it, I start by building a template. Then I revise it, change it, and work with it until I’m happy. Then, it’s time to copy the template to all sections of the wall where I want it. In Minecraft, this is done manually — each block is placed individually by the player. And if you’re building a large building like a castle or some such, that’s a lot of tedious, error-prone work that goes something like this:
+
+1. Look at the template, trying to memorize what it looks like.
+2. Go over to where you’re currently copying the template to, and start placing each block.
+3. Soon you will realize you’ve forgot some aspect of how the template looks, and you have to go back to the template location to look at it again.
+4. Repeat from point 1.
+
+This running back and forth inside the game between your template and your current building area takes a lot of time. So to avoid this, I started taking screenshots of the template (with the F2 key inside Minecraft), and then displaying the screenshot from a secondary screen which I can reference while I’m playing on my primary screen. This method works, but you still have to manually bring up the screenshot on your secondary screen every time you take a new one.
+
+![Minecraft wall](minecraft-wall.png)
+
+The solution
+============
+
+So, to solve this problem — to scratch this personal itch — I decided to write a very simple Python program called **ImageMon**, that would automatically display the last screenshot I took at all times. That way, I only have to start that program once on my secondary screen, and any time I take a new in-game screenshot, my program will display it automatically.
+
+*Note: ImageMon uses `pillow`, the drop-in replacement for `PIL`, the Python Image Library. It is best to install pillow in a virtual environment. However, an explanation of how this is done is beyond the scope of this article; go look up a virtualenv tutorial if you need assistance with this part, and then install `pillow` in your virtual environment.*
+
+All we need to display images (such as screenshots) in Python is TkInter, which typically comes with Python when you install it. However, we also want to be able to resize these screenshots to make them fit nicely on our secondary screen, and for that we need the pillow module which you can install with pip.
+
+So how will ImageMon work?
+==========================
+
+1. We begin by making a list of all files in the screenshot folder.
+2. Then we enter a loop where we wait one second, then we list all the files in the screenshot folder again.
+3. If we find at least one new file — one that wasn’t there last time we looked a second ago — then we load it into memory.
+4. Then, we resize it to fit our screen using pillow.
+5. We then check if we’re already displaying an image, and if so, we stop displaying it because we only want to display one image at any one time.
+6. Then we finally display the new image using TkInter.
+
+Enough of this, show me the code
+================================
+
+Okay. Let’s start with the imports. Please note that the code in this article is in image format. However, should you wish to copy and paste, it is also available on [GitHub](https://github.com/Enfors/ImageMon/blob/main/imagemon.py).
+
+```python
+#!/usr/bin/env python3
+
+"""
+ImageMon by Christer Enfors 2021. Released under GPL version 3.
+
+Run this program while playing Minecraft Java Edition. If you make a
+screenshot from inside Minecraft with the F2 key, this program will
+display that screenshot in a separate window.
+"""
+
+from os import listdir
+from os.path import isfile, join, expanduser
+import time
+import tkinter as tk
+from PIL import Image, ImageTk, UnidentifiedImageError
+```
+
+Okay, good. Now, let’s continue with a function which finds all screenshot files in the screenshots folder:
+
+```python
+def get_screenshot_list(path: str):
+    files = [f for f in listdir(path) if isfile(join(path, f)) and
+             f.endswith(".png")]
+    return files
+```
+
+This function is very short thanks to the clever list comprehension functionality of Python, which allows us to create lists using a very compact syntax. But before we can understand how it works, there are a few functions that it uses that we first might need to explain:
+
+1. `listdir`. This function was imported from `os` above, and it gives you a list of all files and directories inside a given path.
+2. `isfile`. This was imported from `os.path`, and it returns `True` if we give it the name of a file as an argument. If we give it the name of a directory, it returns `False`. This means that if there are directories inside Minecraft’s screenshots directory for some reason, we can weed them out.
+3. `join`. This function was also imported from `os.path`, and it allows us to concatenate a path with a file name in a portable way. For example, given the path “`screenshots`” and the file name “`screenshot-1.png`”, the `join` function will give us “`screenshots\screenshot-1.png`” on Windows, but “`screenshot/screenshot-1.png`” on Linux (since Windows uses backslashes and Linux uses slashes).
+
+Now that we have an idea of what these functions do, we can attempt to undertand the list comprehension itself. Think of it this way:
+
+“We want the files variable to be a list of each file in the given path if that file is in fact a file and not a directory and it ends with .png”.
+
+List comprehensions can be a bit tricky to understand at first, so don’t worry if you’re not sure how this one works exactly. You can still learn from this article even if you don’t fully understand this part.
+
+Next, we need a function which displays an image, after first having made sure we stop displaying the previous screenshot if we’re already displaying one:
+
+```python
+def show_image(img_path: str, old_img: tk.Label):
+
+    if old_img:
+        old_img.pack_forget()
+
+    image_loaded = False
+
+    while image_loaded is not True:
+        try:
+            image = Image.open(img_path)
+            image_loaded = True
+        except UnidentifiedImageError:
+            # We just noticed that the file is there, but loading it
+            # fails. Why? Probably because it is still in the process
+            # of being created, which could take a second. So, let's
+            # give it exactly that - a second, then try again.
+            time.sleep(1)
+
+    # Change 'width' to make the window a suitable size for your
+    # particular screen resolution.
+    width = 1670
+
+    resized_image = image.resize((width, width*9//16))
+
+    img = ImageTk.PhotoImage(resized_image)
+
+    label1 = tk.Label(image=img)
+    label1.image = img
+    label1.pack()
+
+    return label1
+```
+
+1. If we’re already displaying a screenshot, we stop doing so by calling `old_img.pack_forget()`.
+2. Now we enter a loop, where we try to load the image (because it sometimes fails, so we might have to try several times before it works).
+3. We try to load the image and set `image_loaded` to `True` if we succeed, thus ending the loop. We load it using Image which we imported from `PIL` (read: `pillow`) earlier.
+4. If we fail to load the image, it was probably because the image was in the process of being saved when we found the file. If so, wait a second, then try again from the top of the loop.
+5. Now, we want to resize the image to fit nicely on our secondary screen. Through experimentation, I noticed that the width 1670 worked well for my screen resolution. Make it bigger or smaller as you see fit by changing this number.
+6. To calculate the height to which we want to resize the image, we take it’s width and multiply it with 9 divided by 16 (since widescreens are 16:9 ratio). The double slash (“`//`”) means integer division — it always gives us an integer as a result. If you’re playing Minecraft on a screen with a different aspect ratio than 16:9, then change these numbers accordingly. For example, on an old-style 4:3 ratio screen, you’d multiply the width by 3 divided by 4.
+7. Now, we can create a ImageTk (which TkInter can work with) from our resized image, and then display it using the “pack” function.
+8. Finally, we return this image, so that we can save it for later — the next time we want to display an image, we want to start by first “undisplaying” this one, so we need to keep the variable that holds it.
+
+Now that we have the supporting functions in place, we can implement our `main` function:
+
+```python
+def main():
+    root = tk.Tk()
+
+    # Get the path to the directory where Minecraft stores screenshots.
+    # In Linux, it's ~/.minecraft/screenshots, and in Windows it's
+    # %appdata%\.minecraft\screenshots.
+    # Using expanduser("~"), we get the first part - the home directory.
+    # Using join, we can then concatenate that with the remaining parts
+    # of the path to get the full path in a portable way.
+
+    path = join(expanduser("~"), ".minecraft", "screenshots")
+
+    old_list = get_screenshot_list(path)
+    old_img = None
+
+    try:
+        while True:
+            time.sleep(.1)
+            new_list = get_screenshot_list(path)
+
+            new_files = [f for f in new_list if f not in old_list]
+
+            if new_files:
+                old_img = show_image(join(path, new_files[0]), old_img)
+
+            old_list = new_list.copy()
+
+            try:
+                root.update()
+            except tk.TclError:
+                # The user has probably closed the window. Just exit.
+                return
+
+    except KeyboardInterrupt:
+        return
+```
+1. We use the `expanduser` function which we imported from `os.path` to find the directory inside the user’s home directory in which Minecraft stores its screenshots.
+2. Then, we get the initial list of screenshots (if any) already present in the folder. We don’t want to display those — we just want this list to compare with, so that we will know which files are newer.
+3. Then, we enter a loop:
+4. First, sleep for one second. We don’t want to create a `busyloop` — a loop which frantically looks for new files as fast as it can, eating up CPU time and I/O resources needlessly. Looking once per second is enough.
+5. Then, we use our previously defined `get_screenshot_list` function to get a list of screenshots.
+6. Now, we again use a list comprehension. This time, we’re trying to compare `old_list` to `new_list`, and we want the resulting `new_files` list to be a list of all files that exist in `new_list` but not in `old_list` — that is to say, we want the `new_files` list to (unsurprisingly) contain the new screenshots since last time we looked a second ago.
+7. If there are new files, then call our `show_image` function on the first of them. If there are multiple new screenshots since last second, then only one of them will be displayed, that’s not a problem. Note that we’re also supplying `old_img` to `show_image`, so that it can use it to stop showing the currently shown image, if any.
+8. Now, the `new_list` is the old list for the next run through the loop.
+9. Then finally, we call the TkInter function `update` on its `root` object, to update the display.
+10. If the user closes the screenshot window or presses Control-c in the terminal, then exit the program.
+
+All we have left to do now is add the all-important code that calls our `main` function:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+And that’s it! We now have a working program that displays any new screenshots as soon as they’re taken in Minecraft.
+
+---
+
+As you no doubt have noticed, this program is by no means perfect. I’ve intentionally tried to keep it as simple as possible, to illustrate the core concepts involved, using as few third-party modules as possible.
+
+As an exercise, you could try to modify the code in such a way that it automatically detects the resolution of your secondary screen and resize the image accordingly, rather resizing it to a hard-coded number like my version does. Additionally, you could also make it resize the image if the user resizes the window.
+
+Good luck! And let me know if you have any problems, and I’ll try to help.
